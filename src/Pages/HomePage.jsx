@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
-import DeckMap from '../Components/DeckMap'
+// import DeckMap from '../Components/DeckMap'
+import MovieMap from '../Components/MovieMap'
 import Search from '../Components/Search'
 
 // import './HomePage.css';
@@ -18,8 +19,8 @@ export default function HomePage () {
       .then((response) => response.json())
       .then((data) => {
         setMovies(data)
-        console.log(data)
-        console.log([...new Set(data.map((value) => value.locations))])
+        // console.log(data)
+        // console.log([...new Set(data.map((value) => value.locations))])
       })
   }, [])
 
@@ -37,8 +38,8 @@ export default function HomePage () {
   movies={ movies }
   searchVal = { searchVal } setSearchVal = { setSearchVal }
   location = { location } setLocation = { setLocation } />
-  {/* <Map searchVal = { searchVal }/> */}
-  <DeckMap />
+
+  <MovieMap location = { location } />
   </div>
 }
 
