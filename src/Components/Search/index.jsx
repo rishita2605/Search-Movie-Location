@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 // import './Search.css'
 
-export default function Search ({ movies, searchVal, setSearchVal }) {
+export default function Search ({ movies, searchVal, setSearchVal, location, setLocation }) {
   /* ++++++++++ Function State ++++++++++ */
   const [movieTitle, setMovieTitle] = useState([])
   /* ---------- Function State ---------- */
@@ -24,10 +24,26 @@ export default function Search ({ movies, searchVal, setSearchVal }) {
   /* ---------- Side Effects ---------- */
 
   /* ++++++++++ Function Methods ++++++++++ */
+
+  /**
+   * To search when enter is pressed.
+   * @param object event
+   */
+  const searchOnEnter = (event) => {
+    if (event.key === 'Enter') {
+      console.log(event.target.value)
+      setSearchVal(event.target.value)
+      const loc = []
+      for (const m of movies) {
+        if (m.title === searchVal) loc.push(m.locations)
+      }
+      setLocation(loc)
+    }
+  }
   /* ---------- Function Methods ---------- */
 
   /* ++++++++++ Function Render Method ++++++++++ */
-  return <Autocomplete
+  return <div className = 'search'><Autocomplete
   items = {movieTitle}
   // What value from the items' object should be displayed in the dropdown.
   getItemValue = { (item) => item.title }
@@ -61,12 +77,22 @@ export default function Search ({ movies, searchVal, setSearchVal }) {
   value={searchVal}
   onChange={ (event) => setSearchVal(event.target.value) }
   onSelect={ (val) => setSearchVal(val) }
+
+  // Using render input so that the onKeyUp event can be attached to it.
+  renderInput={
+    function (props) {
+      return <input {...props} onKeyUp={(evt) => { searchOnEnter(evt) }}/>
+    }
+  }
   />
+  </div>
 }
 
 Search.displayName = 'Search'
 Search.propTypes = {
   movies: PropTypes.array.isRequired,
   searchVal: PropTypes.string.isRequired,
-  setSearchVal: PropTypes.func.isRequired
+  setSearchVal: PropTypes.func.isRequired,
+  location: PropTypes.array.isRequired,
+  setLocation: PropTypes.func.isRequired
 }
