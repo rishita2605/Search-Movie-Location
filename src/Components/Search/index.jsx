@@ -60,7 +60,8 @@ export default function Search ({ movies, searchVal, setSearchVal, location, set
      */
     renderItem = { (item, isHighlighted) => {
       return <div key={item.title}
-      style={ { background: isHighlighted ? '#bcf5bc' : 'white' } }>
+      style={ { background: isHighlighted ? 'linear-gradient( 45deg, rgba(14, 14, 14, 0.38), rgba(24, 23, 23, 0.447))' : 'linear-gradient( 45deg, rgba(255, 244, 244, 0.38), rgba(255, 244, 244, 0.047))' } }
+      className = 'search__menu-item'>
         {item.title}
       </div>
     } }
@@ -85,9 +86,16 @@ export default function Search ({ movies, searchVal, setSearchVal, location, set
     // Using render input so that the onKeyUp event can be attached to it.
     renderInput={
       function (props) {
-        return <input {...props} onKeyUp={(evt) => { searchMovie(evt) }}/>
+        return <input {...props} onKeyUp={(evt) => { searchMovie(evt) }} className='search__input'/>
       }
     }
+    menuStyle={ {
+      position: 'fixed',
+      overflow: 'auto',
+      maxHeight: '50%',
+      width: '13em',
+      scrollBehavior: 'smooth'
+    } }
     />
     <SearchBtn searchMovie = { searchMovie }/>
   </div>

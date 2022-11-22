@@ -3,8 +3,32 @@
   box-sizing: border-box;
   margin:0;
   padding:0; 
+  font-family: 'Cormorant Garamond', serif;
+  font-family: 'EB Garamond', serif;
+  color: white;
 }
 
 body{
   background-color: palevioletred;
+  background-image: url('./Desktop\ -\ 1.jpg');
+  background-size: cover;
+}
+
+::selection{
+  color: black;
+  background: #FFD463;
+}
+
+::-webkit-scrollbar{
+  width: 14px;
+}
+
+::-webkit-scrollbar-track{
+  background: linear-gradient( 80deg, rgba(18, 18, 18, 0.323), rgba(33, 33, 33, 0));
+}
+
+::-webkit-scrollbar-thumb{
+  background: linear-gradient(45deg, #FB1261, #FFD463);
+  border-radius: 4em;
+  height: 1.5em;
 }

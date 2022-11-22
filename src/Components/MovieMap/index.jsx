@@ -46,13 +46,15 @@ export default function MovieMap ({ location }) {
 
     map.current = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: 'mapbox://styles/rishita2605/clas5n21q008214ldcyd10rql',
+      // mapbox://styles/rishita2605/clas3o8vm000e14myj5vochbu
+      // mapbox://styles/rishita2605/claryzb8i001s15p8excxuxje
       center: [-122.271356, 37.804456],
       zoom: 10
     })
 
     // Add navigation control (the +/- zoom buttons)
-    map.current.addControl(new mapboxgl.NavigationControl(), 'top-right')
+    map.current.addControl(new mapboxgl.NavigationControl(), 'bottom-left')
   })
 
   // Get coordinates from the location name -> geocoding api
@@ -61,12 +63,11 @@ export default function MovieMap ({ location }) {
     getCoordinates(location)
   }, [location])
 
-  // Add markers whenever a movie is searched ()
+  // Add markers whenever a movie is searched
   useEffect(() => {
     if (!map.current) return // Map hasn't been initialised yet
 
     const markers = []
-
     for (const m of mapMarker) m.remove() // removing markers of previous movie location.
 
     // Creating markers for the location.

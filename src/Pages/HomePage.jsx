@@ -3,8 +3,7 @@ import React, { useState, useEffect } from 'react'
 // import DeckMap from '../Components/DeckMap'
 import MovieMap from '../Components/MovieMap'
 import Search from '../Components/Search'
-
-// import './HomePage.css';
+import './HomePage.scss'
 
 export default function HomePage () {
   /* ++++++++++ Function State ++++++++++ */

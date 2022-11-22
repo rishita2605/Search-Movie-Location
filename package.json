@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "deck.gl": "^8.8.20",
     "mapbox-gl": "^2.11.0",
+    "node-sass": "^7.0.3",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-autocomplete": "^1.8.1",
