@@ -7,7 +7,9 @@ export default function MovieMap ({ location }) {
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN
   /* ++++++++++ Function State ++++++++++ */
   const mapContainerRef = useRef(null)
+  const map = useRef(null)
   const [coords, setCoords] = useState([])
+  const [mapMarker, setMapMarker] = useState([])
   /* ---------- Function State ---------- */
 
   /* ++++++++++ Function Constants ++++++++++ */
@@ -32,7 +34,9 @@ export default function MovieMap ({ location }) {
   /* ++++++++++ Side Effects ++++++++++ */
   // Creating the map object
   useEffect(() => {
-    const map = new mapboxgl.Map({
+    if (map.current) return // Do not initialise map more than once.
+
+    map.current = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [-122.271356, 37.804456],
@@ -40,20 +44,8 @@ export default function MovieMap ({ location }) {
     })
 
     // Add navigation control (the +/- zoom buttons)
-    map.addControl(new mapboxgl.NavigationControl(), 'top-right')
-
-    for (const c of coords) {
-      new mapboxgl.Marker().setLngLat(c).addTo(map)
-    }
-
-    map.flyTo({
-      center: coords[0],
-      essential: true
-    })
-
-    // Clean up on unmount
-    return () => map.remove()
-  }, [coords, location])
+    map.current.addControl(new mapboxgl.NavigationControl(), 'top-right')
+  })
 
   // Get coordinates from the location name, geocoding api
   useEffect(() => {
@@ -62,6 +54,26 @@ export default function MovieMap ({ location }) {
     console.log(coords)
   }, [location])
 
+  // Add markers whenever a movie is searched ()
+  useEffect(() => {
+    if (!map.current) return // Map hasn't been initialised yet
+
+    const markers = []
+
+    for (const m of mapMarker) m.remove() // removing markers of previous location.
+
+    // Creating markers for the location.
+    for (const c of coords) {
+      markers.push(new mapboxgl.Marker().setLngLat(c).addTo(map.current))
+    }
+    setMapMarker(markers)
+
+    // for the animation when moving from one location to another.
+    map.current.flyTo({
+      center: coords[0],
+      essential: true
+    })
+  }, [coords, location])
   /* ---------- Side Effects ---------- */
 
   return <div className='map' ref={mapContainerRef}></div>
