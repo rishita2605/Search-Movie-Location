@@ -19,14 +19,22 @@ export default function MovieMap ({ location }) {
 
   const getCoordinates = async () => {
     const coordinates = []
+    console.log(location)
 
-    for (const loc of location) {
+    for (let loc of location) {
+      // location with at __ street does not give proper result.
+      loc = loc?.indexOf(' at ') === -1 ? loc : loc?.substring(0, loc?.indexOf(' at '))
+      // location with between don't give proper result.
+      loc = loc?.indexOf(' between ') === -1 ? loc : loc?.substring(0, loc?.indexOf(' between '))
+
       const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(loc)}.json?bbox=-122.517688%2C37.707798%2C-122.356967%2C37.832427&limit=1&proximity=-122.42344351864507%2C37.784784180620065&types=place%2Caddress%2Cneighborhood%2Cpoi%2Cregion%2Clocality&access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`)
 
       const data = await response.json()
-      coordinates.push(data?.features[0]?.center)
+      const result = data?.features[0]?.center
+      if (result) coordinates.push(data?.features[0]?.center) // add the coordinates only if it not empty / undef
     }
 
+    console.log(coordinates)
     setCoords(coordinates)
   }
   /* ---------- Function Methods ---------- */
@@ -47,11 +55,10 @@ export default function MovieMap ({ location }) {
     map.current.addControl(new mapboxgl.NavigationControl(), 'top-right')
   })
 
-  // Get coordinates from the location name, geocoding api
+  // Get coordinates from the location name -> geocoding api
   useEffect(() => {
-    console.log(location)
+    console.log(location.length)
     getCoordinates(location)
-    console.log(coords)
   }, [location])
 
   // Add markers whenever a movie is searched ()
@@ -60,7 +67,7 @@ export default function MovieMap ({ location }) {
 
     const markers = []
 
-    for (const m of mapMarker) m.remove() // removing markers of previous location.
+    for (const m of mapMarker) m.remove() // removing markers of previous movie location.
 
     // Creating markers for the location.
     for (const c of coords) {
