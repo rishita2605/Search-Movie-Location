@@ -47,10 +47,8 @@ export default function MovieMap ({ location }) {
     map.current = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: 'mapbox://styles/rishita2605/clas5n21q008214ldcyd10rql',
-      // mapbox://styles/rishita2605/clas3o8vm000e14myj5vochbu
-      // mapbox://styles/rishita2605/claryzb8i001s15p8excxuxje
       center: [-122.271356, 37.804456],
-      zoom: 10
+      zoom: 11
     })
 
     // Add navigation control (the +/- zoom buttons)

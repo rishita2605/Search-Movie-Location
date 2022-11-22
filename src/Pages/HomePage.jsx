@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import MovieCard from '../Components/MovieCard'
 
 // import DeckMap from '../Components/DeckMap'
 import MovieMap from '../Components/MovieMap'
@@ -18,8 +19,6 @@ export default function HomePage () {
       .then((response) => response.json())
       .then((data) => {
         setMovies(data)
-        // console.log(data)
-        // console.log([...new Set(data.map((value) => value.locations))])
       })
   }, [])
 
@@ -38,7 +37,10 @@ export default function HomePage () {
   searchVal = { searchVal } setSearchVal = { setSearchVal }
   location = { location } setLocation = { setLocation } />
 
+  <MovieCard movies={ movies } location={ location } searchVal={ searchVal }/>
+
   <MovieMap location = { location } />
+
   </div>
 }
 
