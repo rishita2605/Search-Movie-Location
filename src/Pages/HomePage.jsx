@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import MovieCard from '../Components/MovieCard'
 
-// import DeckMap from '../Components/DeckMap'
-import MovieMap from '../Components/MovieMap'
+// import MovieCard from '../Components/MovieCard'
+// import MovieMap from '../Components/MovieMap'
 import Search from '../Components/Search'
 import './HomePage.scss'
 
@@ -19,6 +18,7 @@ export default function HomePage () {
       .then((response) => response.json())
       .then((data) => {
         setMovies(data)
+        console.log(movies)
       })
   }, [])
 
@@ -31,15 +31,18 @@ export default function HomePage () {
   /* ---------- Function Methods ---------- */
 
   /* ++++++++++ Function Render Method ++++++++++ */
-  return <div className='home-page'>
-  <Search
-  movies={ movies }
-  searchVal = { searchVal } setSearchVal = { setSearchVal }
-  location = { location } setLocation = { setLocation } />
+  return <div className='home-page container'>
+    <div className="container__column">
+    <Search
+      movies={ movies }
+      searchVal = { searchVal } setSearchVal = { setSearchVal }
+      location = { location } setLocation = { setLocation } />
+    </div>
+    <div className="container__column"></div>
 
-  <MovieCard movies={ movies } location={ location } searchVal={ searchVal }/>
+  {/* <MovieCard movies={ movies } location={ location } searchVal={ searchVal }/>
 
-  <MovieMap location = { location } />
+  <MovieMap location = { location } /> */}
 
   </div>
 }

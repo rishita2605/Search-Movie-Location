@@ -1,3 +1,18 @@
+:root{
+  --global-horizontal-padding: 5rem; 
+  --global-vertical-padding: 3rem;
+
+  --global-white: rgb(255, 244, 255);
+  --global-red: rgb(234, 28, 36);
+  --global-light-red: rgb(251, 98, 76); 
+  --global-dark-grey: rgb(25, 26, 35);
+  --global-medium-grey: rgb(34, 37, 47);
+  --global-light-grey: rgb(132, 132, 132);
+
+  --grey-shadow: rgb(34, 37, 47);
+
+}
+
 /* Reset styles and use border box */
 *{
   box-sizing: border-box;
@@ -5,19 +20,15 @@
   padding:0; 
   font-family: 'Cormorant Garamond', serif;
   font-family: 'EB Garamond', serif;
-  color: white;
-  font-size: 1rem;
 }
 
 body{
-  background-color: palevioletred;
-  background-image: url('./Desktop\ -\ 1.jpg');
-  background-size: cover;
+  background-color: rgb(34, 20, 24);
 }
 
 ::selection{
-  color: black;
-  background: #FFD463;
+  color: var(--global-white);
+  background: var(--global-red);
 }
 
 ::-webkit-scrollbar{

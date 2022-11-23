@@ -4,3 +4,15 @@
   background-color: rgba(255,255,255,0.01);
   backdrop-filter: blur(20px);
 }
+
+.App{
+  border: 2px solid yellow;
+  height: 100vh;
+  width: 100vw;
+  padding: var(--global-vertical-padding, 3rem) var(--global-horizontal-padding, 5rem);
+}
+
+.container{
+  border: 2px solid red;
+  height: 100%;
+}

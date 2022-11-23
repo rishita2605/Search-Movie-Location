@@ -1,4 +1,13 @@
-.search{
+
+.container{
+  border: 2px solid teal;
+  display: grid;
+  grid-template-columns: 1fr fit-content(13px);
+  .container__column{
+    border: 2px solid palevioletred;
+  }
+}
+.searchs{
   position: absolute;
   z-index: 10;
   width: 100vw;
