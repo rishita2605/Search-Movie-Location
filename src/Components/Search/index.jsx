@@ -2,7 +2,9 @@ import { React, useState, useEffect } from 'react'
 
 import Autocomplete from 'react-autocomplete'
 import PropTypes from 'prop-types'
+
 import SearchBtn from '../SearchBtn'
+import { ReactComponent as SearchIcon } from '../../Icons/SearchIcon.svg'
 
 // import './Search.css'
 
@@ -10,6 +12,29 @@ export default function Search ({ movies, searchVal, setSearchVal, location, set
   /* ++++++++++ Function State ++++++++++ */
   const [movieTitle, setMovieTitle] = useState([])
   /* ---------- Function State ---------- */
+
+  /* ++++++++++ Function Constants ++++++++++ */
+  const menuStyle = {
+    display: 'block',
+    maxHeight: '30vh',
+    position: 'absolute',
+    overflow: 'auto',
+    width: '40vw',
+    scrollBehavior: 'smooth',
+    left: 0,
+    top: '10vh' // height of search container
+  }
+
+  const menuItemStyle = {
+    isHighlighted: {
+      background: 'rgba(0,0,0,0.01)',
+      boxShadow: 'inset 1px 1px 2px rgba(255, 244, 255, 0.676), inset -1px -1px 2px rgba(255, 244, 255, 0.676)'
+    },
+    notHighlighted: {
+      background: 'rgba(0,0,0,0.01)'
+    }
+  }
+  /* ---------- Function Constants ---------- */
 
   /* ++++++++++ Side Effects ++++++++++ */
   useEffect(
@@ -31,6 +56,9 @@ export default function Search ({ movies, searchVal, setSearchVal, location, set
    * @param object event
    */
   const searchMovie = (event) => {
+    // Checking if the input is empty i.e no search value entered.
+    if ((event.key === 'Enter' && event.target.value.trim().length === 0) && searchVal.trim().length === 0) return
+
     if (event.key === 'Enter') {
       setSearchVal(event.target.value)
     }
@@ -46,59 +74,60 @@ export default function Search ({ movies, searchVal, setSearchVal, location, set
   /* ---------- Function Methods ---------- */
 
   /* ++++++++++ Function Render Method ++++++++++ */
-  return <div className = 'search'>
-    <Autocomplete
-    items = {movieTitle}
-    // What value from the items' object should be displayed in the dropdown.
-    getItemValue = { (item) => item.title }
+  return (
+  <div className="search">
+  <div className = 'search__container'>
+    <div className="autocomplete-container">
+      <Autocomplete
+      items = {movieTitle}
+      // What value from the items' object should be displayed in the dropdown.
+      getItemValue = { (item) => item.title }
 
-    /**
-     * Renders the dropdown item.
-     *
-     * @param item
-     * @param isHighlighted controls whether the item should be highlighted.
-     */
-    renderItem = { (item, isHighlighted) => {
-      return <div key={item.title}
-      style={ { background: isHighlighted ? 'linear-gradient( 45deg, rgba(14, 14, 14, 0.38), rgba(24, 23, 23, 0.447))' : 'linear-gradient( 45deg, rgba(255, 244, 244, 0.38), rgba(255, 244, 244, 0.047))' } }
-      className = 'search__menu-item'>
-        {item.title}
-      </div>
-    } }
+      /**
+       * Renders the dropdown item.
+       *
+       * @param item
+       * @param isHighlighted controls whether the item should be highlighted.
+       */
+      renderItem = { (item, isHighlighted) => {
+        return <div key={item.title}
+        style= { isHighlighted ? menuItemStyle.isHighlighted : menuItemStyle.notHighlighted }
+        className = 'search__menu-item'>
+          {item.title}
+        </div>
+      } }
 
-    /**
-     * The items should be matched even if the cases don't match.
-     * shouldItemRender is invoked for each item in items. The return value of this function
-     * determines whether a dropdown element needs to be displayed or not.
-     * Displaying items only when they're found in the list. All items are displayed by default.
-     *
-     * @param item item from list
-     * @param value value entered in input
-    */
-    shouldItemRender = { (item, value) => {
-      return item.title.toLowerCase().indexOf(value.toLowerCase()) > -1 && value.length >= 0
-    } }
+      /**
+       * The items should be matched even if the cases don't match.
+       * shouldItemRender is invoked for each item in items. The return value of this function
+       * determines whether a dropdown element needs to be displayed or not.
+       * Displaying items only when they're found in the list. All items are displayed by default.
+       *
+       * @param item item from list
+       * @param value value entered in input
+      */
+      shouldItemRender = { (item, value) => {
+        return item.title.toLowerCase().indexOf(value.toLowerCase()) > -1 && value.length >= 0
+      } }
 
-    value={searchVal}
-    onChange={ (event) => setSearchVal(event.target.value) }
-    onSelect={ (val) => setSearchVal(val) }
+      value={searchVal}
+      onChange={ (event) => setSearchVal(event.target.value) }
+      onSelect={ (val) => setSearchVal(val) }
 
-    // Using render input so that the onKeyUp event can be attached to it.
-    renderInput={
-      function (props) {
-        return <input {...props} onKeyUp={(evt) => { searchMovie(evt) }} className='search__input'/>
+      // Using render input so that the onKeyUp event can be attached to it.
+      renderInput={
+        function (props) {
+          return <input {...props} onKeyUp={(evt) => { searchMovie(evt) }} className='search__input'/>
+        }
       }
-    }
-    menuStyle={ {
-      position: 'fixed',
-      overflow: 'auto',
-      maxHeight: '50%',
-      width: '13em',
-      scrollBehavior: 'smooth'
-    } }
-    />
+      menuStyle={menuStyle}
+      />
+    </div>
+    <SearchIcon className='icon-container'/>
     <SearchBtn searchMovie = { searchMovie }/>
   </div>
+  </div>
+  )
 }
 
 Search.displayName = 'Search'

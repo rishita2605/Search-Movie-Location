@@ -6,11 +6,16 @@
   --global-red: rgb(234, 28, 36);
   --global-light-red: rgb(251, 98, 76); 
   --global-dark-grey: rgb(25, 26, 35);
-  --global-medium-grey: rgb(34, 37, 47);
+  --global-medium-grey:  rgb(41, 44, 55); /*rgb(34, 37, 47)*/
   --global-light-grey: rgb(132, 132, 132);
 
-  --grey-shadow: rgb(34, 37, 47);
+  --grey-shadow: rgba(34, 37, 47, 0.426);
+  --white-shadow: rgba(255, 244, 255, 0.676);
+  --red-shadow: rgba(234, 28, 35, 0.306);
+  --light-red-shadow: rgba(251, 99, 76, 0.4);
 
+  --global-background: var(--global-dark-grey);
+  --global-text: var(--global-white);
 }
 
 /* Reset styles and use border box */
@@ -18,12 +23,12 @@
   box-sizing: border-box;
   margin:0;
   padding:0; 
-  font-family: 'Cormorant Garamond', serif;
-  font-family: 'EB Garamond', serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 body{
-  background-color: rgb(34, 20, 24);
+  background-color: var(--global-background);
+  color: var(--global-text);
 }
 
 ::selection{
@@ -40,7 +45,7 @@ body{
 }
 
 ::-webkit-scrollbar-thumb{
-  background: linear-gradient(45deg, #FB1261, #FFD463);
+  background: linear-gradient(45deg, var(--global-red), var(--global-light-red));
   border-radius: 4em;
   height: 1.5em;
 }
