@@ -6,8 +6,6 @@ import PropTypes from 'prop-types'
 import SearchBtn from '../SearchBtn'
 import { ReactComponent as SearchIcon } from '../../Icons/SearchIcon.svg'
 
-// import './Search.css'
-
 export default function Search ({ movies, searchVal, setSearchVal, location, setLocation }) {
   /* ++++++++++ Function State ++++++++++ */
   const [movieTitle, setMovieTitle] = useState([])
@@ -19,7 +17,7 @@ export default function Search ({ movies, searchVal, setSearchVal, location, set
     maxHeight: '30vh',
     position: 'absolute',
     overflow: 'auto',
-    width: '40vw',
+    width: '39.5vw',
     scrollBehavior: 'smooth',
     left: 0,
     top: '10vh' // height of search container
