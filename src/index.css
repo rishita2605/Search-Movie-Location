@@ -11,8 +11,8 @@
 
   --grey-shadow: rgba(34, 37, 47, 0.426);
   --white-shadow: rgba(255, 244, 255, 0.676);
-  --red-shadow: rgba(234, 28, 35, 0.306);
-  --light-red-shadow: rgba(251, 99, 76, 0.4);
+  --red-shadow: rgba(234, 28, 35, 0.3);
+  --light-red-shadow: rgba(251, 99, 76, 0.2);
 
   --global-background: var(--global-dark-grey);
   --global-text: var(--global-white);

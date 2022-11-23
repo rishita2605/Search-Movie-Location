@@ -78,14 +78,14 @@
     border-radius: 5em;
     opacity: 0.8;
     box-shadow: -2px 5px 14px rgba(0, 0, 0, 0), 2px 5px 14px rgba(0, 0, 0, 0);
-    transition: opacity 350ms ease, box-shadow 650ms ease;
+    transition: opacity 250ms ease-in, box-shadow 300ms ease;
   }
 
   // Placed icon after the input to target it for animation.
   .icon-container {
     order: -1; // default order -> 0
     opacity: 0.6;
-    transition: opacity 350ms ease;
+    transition: opacity 250ms ease-in;
     margin: 0;
 
     #icon--glow {
@@ -102,7 +102,7 @@
 
   .autocomplete-container:focus-within~&__btn {
     opacity: 1;
-    box-shadow: -2px 5px 14px var(--red-shadow), 2px 5px 14px var(--light-red-shadow);
+    box-shadow: -2px 4px 12px var(--red-shadow), 2px 4px 12px var(--light-red-shadow);
   }
 
 }
