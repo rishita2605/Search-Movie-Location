@@ -156,7 +156,6 @@
     .movie-card {
       font-family: 'Roboto', sans-serif;
 
-
       height: fit-content;
       max-height: 61vh; // to handle when text-content exceeds the div height (ends up incrasing the div height if no boundary given. 
       overflow-y: scroll;
@@ -223,5 +222,22 @@
 }
 
 .is-container-visible {
-  width: 357px;
+  width: 29vw;
+  min-width: 24rem;
+  min-width: fit-content;
+}
+
+.marker-popup {
+  box-shadow: 10px -10px 8px var(--grey-shadow);
+
+  .mapboxgl-popup-content {
+    font-family: 'Roboto', sans-serif;
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+    border-radius: 0.5em;
+  }
+
+  .mapboxgl-popup-content {
+    background: var(--global-dark-grey);
+  }
 }

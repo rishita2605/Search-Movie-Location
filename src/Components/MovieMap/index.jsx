@@ -18,7 +18,7 @@ export default function MovieMap ({ location }) {
   /* ++++++++++ Function Methods ++++++++++ */
 
   const getCoordinates = async () => {
-    const coordinates = []
+    const coord = {}
     console.log(location)
 
     for (let loc of location) {
@@ -31,11 +31,12 @@ export default function MovieMap ({ location }) {
 
       const data = await response.json()
       const result = data?.features[0]?.center
-      if (result) coordinates.push(data?.features[0]?.center) // add the coordinates only if it not empty / undef
+      // add the coordinates only if it not empty / undef
+      if (result) coord[loc] = result
     }
 
-    console.log(coordinates)
-    setCoords(coordinates)
+    console.log(coord)
+    setCoords(coord)
   }
   /* ---------- Function Methods ---------- */
 
@@ -71,14 +72,20 @@ export default function MovieMap ({ location }) {
     for (const m of mapMarker) m.remove() // removing markers of previous movie location.
 
     // Creating markers for the location.
-    for (const c of coords) {
-      markers.push(new mapboxgl.Marker().setLngLat(c).addTo(map.current))
+    for (const c in coords) {
+      markers.push(new mapboxgl.Marker({ color: '#EA1C24' }).setLngLat(coords[c]).setPopup(
+        new mapboxgl.Popup({
+          offset: 26,
+          className: 'marker-popup',
+          maxWidth: '140px'
+        }).setText(c)
+      ).addTo(map.current))
     }
     setMapMarker(markers)
 
     // for the animation when moving from one location to another.
     map.current.flyTo({
-      center: coords[0],
+      center: coords[Object.keys(coords)[0]],
       essential: true
     })
   }, [coords, location])
