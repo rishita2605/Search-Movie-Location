@@ -71,14 +71,12 @@
     padding: 1em 5.2em;
     margin-bottom: 0.1em;
     border-radius: 0.5em;
-    box-shadow: inset 1px 1px rgba(0, 0, 0, 0),
-      inset -1px -1px rgba(0, 0, 0, 0);
-    transition: box-shadow 150ms ease;
+    box-shadow: none;
+    transition: box-shadow 100ms linear;
     backdrop-filter: blur(14px);
 
     &:hover {
-      box-shadow: inset 1px 1px 5px var(--white-shadow),
-        inset -1px -1px 5px var(--white-shadow);
+      box-shadow: 0 2px 10px var(--white-shadow);
       cursor: pointer;
     }
   }
@@ -137,7 +135,7 @@
   width: 0px;
   height: 100%;
   overflow: hidden;
-  transition: width 1800ms cubic-bezier(.11, .87, 1, .99);
+  transition: width 800ms linear;
 
   // add overflow hidden when card is hidden 
   .card {
@@ -239,5 +237,29 @@
 
   .mapboxgl-popup-content {
     background: var(--global-dark-grey);
+  }
+}
+
+.outline-btn {
+  @include remove-styles();
+  display: flex;
+  color: var(--global-white);
+  font-size: 1.2rem;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  border-radius: 0.6em;
+  padding: 0.4rem 0;
+  border: 2px solid var(--global-white);
+  margin: 2.6vh 0;
+  cursor: pointer;
+  transition: box-shadow 200ms linear;
+
+  &__icon {
+    margin: 0 0.5em;
+  }
+
+  &:hover {
+    box-shadow: 0 2px 10px var(--white-shadow);
   }
 }

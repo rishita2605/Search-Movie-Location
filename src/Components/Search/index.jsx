@@ -26,7 +26,7 @@ export default function Search ({ movies, searchVal, setSearchVal, setLocation }
   const menuItemStyle = {
     isHighlighted: {
       background: 'rgba(0,0,0,0.01)',
-      boxShadow: 'inset 1px 1px 2px rgba(255, 244, 255, 0.676), inset -1px -1px 2px rgba(255, 244, 255, 0.676)'
+      boxShadow: '0 2px 10px rgba(255, 244, 255, 0.676)'
     },
     notHighlighted: {
       background: 'rgba(0,0,0,0.01)'

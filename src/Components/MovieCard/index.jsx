@@ -3,6 +3,7 @@ import { React, useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 
 import { ReactComponent as CloseIcon } from '../../Icons/CloseIcon.svg'
+import { ReactComponent as HeartIcon } from '../../Icons/HeartIcon.svg'
 export default function MovieCard ({ movies, location, searchVal }) {
   /* ++++++++++ Function State ++++++++++ */
   const [display, setDisplay] = useState(false) // don't display card until something is searched
@@ -101,6 +102,10 @@ export default function MovieCard ({ movies, location, searchVal }) {
         }
       </div>
     </div>
+    <button className="outline-btn">
+      <span className="outline-btn__text">Want to Visit</span>
+      <div className="outline-btn__icon"><HeartIcon /></div>
+    </button>
     </div>
   </div>
   )
