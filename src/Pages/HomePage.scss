@@ -8,13 +8,25 @@
   }
 }
 
+@mixin add-box-features($box-border-radius) {
+  border-radius: $box-border-radius;
+  box-shadow: -5px 10px 20px rgba(7, 7, 7, 0.595);
+}
+
 .container {
   border: 2px solid teal;
   display: grid;
   grid-template-columns: 1fr fit-content(13px);
 
-  .container__column {
-    border: 2px solid palevioletred;
+  &__column {
+    // border: 2px solid palevioletred;
+    display: grid;
+    height: 100%;
+    position: relative;
+
+    &--left {
+      grid-template-rows: auto 1fr;
+    }
   }
 }
 
@@ -26,14 +38,16 @@
 
 .search {
 
+  position: relative;
+  z-index: 10;
+
   &__container {
-    width: 34vw;
-    min-width: fit-content;
+    @include add-box-features(0.9rem);
+    width: fit-content;
+    min-width: 24rem;
     position: relative;
-    border-radius: 0.9em;
     height: 10vh;
     padding: 2vh 1vw;
-    box-shadow: -5px 10px 20px rgba(7, 7, 7, 0.595);
     display: flex;
     align-items: center;
 
@@ -44,11 +58,12 @@
 
   &__input {
     @include remove-styles();
+    font-family: 'Raleway', sans-serif;
     padding: 0.5em 0;
-    width: 100%;
     color: var(--global-text);
     font-size: 1.2rem;
     width: 22vw;
+    min-width: 12em;
   }
 
   &__menu-item {
@@ -59,6 +74,7 @@
     box-shadow: inset 1px 1px rgba(0, 0, 0, 0),
       inset -1px -1px rgba(0, 0, 0, 0);
     transition: box-shadow 150ms ease;
+    backdrop-filter: blur(14px);
 
     &:hover {
       box-shadow: inset 1px 1px 5px var(--white-shadow),
@@ -69,11 +85,14 @@
 
   &__btn {
     @include remove-styles();
+    font-family: 'Roboto', sans-serif;
     cursor: pointer;
     background-color: var(--global-red);
     color: var(--global-white);
-    padding: 0.8em 3em;
-    font-weight: 600;
+    padding: 0.8em 2.6em;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.09rem;
     font-size: 1.01rem;
     border-radius: 5em;
     opacity: 0.8;
@@ -108,43 +127,101 @@
 }
 
 .map {
-  height: 40px;
+  height: 92%; // 100%;
+  margin: auto 0 0 0;
+  width: 100%; // change this for animation when box appears
+  @include add-box-features(1.4rem);
 }
 
-/*
+.card-container {
+  width: 0px;
+  height: 100%;
+  overflow: hidden;
+  transition: width 1800ms cubic-bezier(.11, .87, 1, .99);
 
-.card-container{
-  position: absolute;
-  z-index: 20;
-  bottom: 0;
-  right: 0;
-  height: 100vh;
-  width: fit-content;
-  display:flex;
-  align-items: center;
-  .movie-card{
-    height: fit-content;
-    width: 24vw;
-    margin: 0 1em;
-    padding: 2.6em 1em;
-    border-radius: 0.6em;
-    background: linear-gradient( 45deg, rgba(255, 244, 244, 0.162), rgba(255, 244, 244, 0));
-    border: 1px solid rgba(229, 218, 218, 0.26);
-    backdrop-filter: blur(5px);
-    .movie-card__header{
-      background: linear-gradient( 45deg, rgba(255, 244, 244, 0.162), rgba(255, 244, 244, 0));
-      border: 1px solid rgba(229, 218, 218, 0.26);
-      backdrop-filter: blur(5px);
-      font-size: 1.4rem;
-      text-align: center;
-      padding: 0.3em 0;
-      border-radius: 0.2em;
-      margin: 0.5em 0;
-      font-weight: 600;
-      background: linear-gradient(45deg, #FB1261, #FFD463);
-      border-radius: 0.3em;
-      box-shadow:0 14px 10px rgba(255, 211, 99, 0.108), 10px 10px 15px rgba(221, 20, 87, 0.211);
-      color: black;
+  // add overflow hidden when card is hidden 
+  .card {
+
+    padding: 1.5vh 1vw 0 2vw;
+    margin-left: 1rem;
+    height: 100%;
+    background-color: var(--global-medium-grey);
+    @include add-box-features(1.4rem);
+
+    //features being animated
+    opacity: 0;
+    transform: translateX(30vw); // animating this
+    transition: transform 2200ms cubic-bezier(.11, .87, 1, .99), opacity 4500ms cubic-bezier(.11, .87, 1, .99);
+
+    .movie-card {
+      font-family: 'Roboto', sans-serif;
+
+
+      height: fit-content;
+      max-height: 61vh; // to handle when text-content exceeds the div height (ends up incrasing the div height if no boundary given. 
+      overflow-y: scroll;
+
+      $card-header-font: 1.36rem;
+
+      &__header {
+
+        font-size: $card-header-font;
+        font-weight: 600;
+        line-height: 1.8rem;
+        margin-bottom: 0.8rem;
+
+        &--year {
+          font-size: calc(#{ $card-header-font } - #{ $card-header-font }/4);
+        }
+      }
+
+      &__body__field {
+        margin: 0.5rem 0;
+
+        &--label {
+          color: var(--global-light-grey);
+        }
+      }
+    }
+
+    .close {
+      display: flex;
+      justify-content: flex-end;
+
+      &__btn {
+        @include remove-styles();
+        cursor: pointer;
+        transform: rotateZ(0);
+        transition: transform 350ms ease-in;
+
+        #icon {
+          opacity: 0.6;
+          transition: opacity 100ms ease;
+
+          &--glow {
+            opacity: 0;
+          }
+        }
+
+        &:hover {
+          transform: rotateZ(180deg);
+        }
+
+        &:hover #icon,
+        &:hover #icon--glow {
+          opacity: 1;
+        }
+      }
     }
   }
-} */
+
+  .is-card-visible {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+}
+
+.is-container-visible {
+  width: 357px;
+}

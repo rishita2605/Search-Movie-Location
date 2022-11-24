@@ -1,7 +1,8 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect, useRef } from 'react'
 
 import PropTypes from 'prop-types'
 
+import { ReactComponent as CloseIcon } from '../../Icons/CloseIcon.svg'
 export default function MovieCard ({ movies, location, searchVal }) {
   /* ++++++++++ Function State ++++++++++ */
   const [display, setDisplay] = useState(false) // don't display card until something is searched
@@ -12,7 +13,20 @@ export default function MovieCard ({ movies, location, searchVal }) {
     productionCompany: '',
     releaseYear: 0
   })
+  const cardRef = useRef(null)
+  const containerRef = useRef(null)
   /* ---------- Function State ---------- */
+
+  /* ++++++++++ Function Constants ++++++++++ */
+  /* ---------- Function Constants ---------- */
+
+  /* ++++++++++ Function Methods ++++++++++ */
+  const closeCard = () => {
+    cardRef.current.classList.remove('is-card-visible')
+    containerRef.current.classList.remove('is-container-visible')
+    setDisplay(false)
+  }
+  /* ---------- Function Methods ---------- */
 
   /* ++++++++++ Side Effects ++++++++++ */
   // Only the location state changes when a value is searched
@@ -28,6 +42,9 @@ export default function MovieCard ({ movies, location, searchVal }) {
         movieData.location = location.filter((l) => { return !!l })
         movieData.actors = movieData.actors.filter((a) => { return !!a })
         setDisplay(true)
+        console.log(display)
+        cardRef.current.classList.add('is-card-visible')
+        containerRef.current.classList.add('is-container-visible')
       }
     }
     setCardContent(movieData)
@@ -35,43 +52,56 @@ export default function MovieCard ({ movies, location, searchVal }) {
   /* ---------- Side Effects ---------- */
 
   console.log({ cardContent })
-  return (display &&
-  <div className='card-container'>
-  <div className='movie-card'>
-    <div className="movie-card__header">Movie: {cardContent.movieName}</div>
-    <div className="movie-card__body">
-      {
-        cardContent.releaseYear &&
-        <div className='movie-card__body__realease-year'>
-          <b>Released on:</b> {cardContent.releaseYear}
-        </div>
-      }
-      <div className='movie-card__body__movie-info'>
-         {cardContent.director && (<b>Directed by: {cardContent.director} || </b>)}
-         {cardContent.productionCompany && (<b>Produced by: {cardContent.productionCompany}</b>)}
-      </div>
-      {
-        cardContent.location.length > 0 &&
-        <div className='movie-card__body__location'>
-          <b>Location: {' '}</b>
-          {cardContent.location.map((elem, index, array) => {
-            const separator = index === array.length - 1 ? '' : ', '
-            return elem + separator
-          })}
-        </div>
-      }
-      {
-        cardContent.actors.length > 0 &&
-        <div className='movie-card__body__actors'>
-         <b> Actors: {' '}</b>
-          {cardContent.actors.map((elem, index, array) => {
-            const separator = index === array.length - 1 ? '' : ', '
-            return elem + separator
-          })}
-        </div>
-      }
+  return (
+  <div className='card-container' ref={containerRef}>
+    <div className="card" ref={cardRef}>
+    <div className="close">
+      <button className="close__btn" onClick={ closeCard }>
+        <CloseIcon className='close__btn__icon'/>
+      </button>
     </div>
-  </div>
+    <div className='movie-card'>
+      <div className="movie-card__header">
+        <div className="movie-card__header--title">{cardContent?.movieName}</div>
+        {
+          cardContent?.releaseYear &&
+          <div className="movie-card__header--year">{cardContent?.releaseYear}</div>
+        }
+      </div>
+      <div className="movie-card__body">
+        {
+          cardContent?.director && <div className="movie-card__body__field">
+            <span className='movie-card__body__field--label'> Director: {' '}</span> {cardContent?.director}
+          </div>
+        }
+        {
+          cardContent?.director && <div className="movie-card__body__field">
+            <span className='movie-card__body__field--label'> Production Company: {' '}</span> {cardContent?.productionCompany}
+          </div>
+        }
+        {
+          cardContent?.location?.length > 0 &&
+          <div className='movie-card__body__field'>
+            <span className='movie-card__body__field--label'> Shot in: {' '}</span>
+            {cardContent?.location?.map((elem, index, array) => {
+              const separator = index === array.length - 1 ? '' : ', '
+              return elem + separator
+            })}
+          </div>
+        }
+        {
+          cardContent?.actors?.length > 0 &&
+          <div className='movie-card__body__field'>
+          <span className='movie-card__body__field--label'> Cast: {' '}</span>
+            {cardContent?.actors?.map((elem, index, array) => {
+              const separator = index === array.length - 1 ? '' : ', '
+              return elem + separator
+            })}
+          </div>
+        }
+      </div>
+    </div>
+    </div>
   </div>
   )
 }

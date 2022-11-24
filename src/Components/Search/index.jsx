@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import SearchBtn from '../SearchBtn'
 import { ReactComponent as SearchIcon } from '../../Icons/SearchIcon.svg'
 
-export default function Search ({ movies, searchVal, setSearchVal, location, setLocation }) {
+export default function Search ({ movies, searchVal, setSearchVal, setLocation }) {
   /* ++++++++++ Function State ++++++++++ */
   const [movieTitle, setMovieTitle] = useState([])
   /* ---------- Function State ---------- */
@@ -55,7 +55,7 @@ export default function Search ({ movies, searchVal, setSearchVal, location, set
    */
   const searchMovie = (event) => {
     // Checking if the input is empty i.e no search value entered.
-    if ((event.key === 'Enter' && event.target.value.trim().length === 0) && searchVal.trim().length === 0) return
+    if ((event.key === 'Enter' && !event.target.value.trim()) && !searchVal.trim()) return
 
     if (event.key === 'Enter') {
       setSearchVal(event.target.value)

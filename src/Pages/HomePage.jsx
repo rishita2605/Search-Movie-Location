@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-// import MovieCard from '../Components/MovieCard'
+import MovieCard from '../Components/MovieCard'
 import MovieMap from '../Components/MovieMap'
 import Search from '../Components/Search'
 import './HomePage.scss'
@@ -32,16 +32,16 @@ export default function HomePage () {
 
   /* ++++++++++ Function Render Method ++++++++++ */
   return <div className='home-page container'>
-    <div className="container__column">
+    <div className="container__column container__column--left">
     <Search
       movies={ movies }
       searchVal = { searchVal } setSearchVal = { setSearchVal }
       location = { location } setLocation = { setLocation } />
     <MovieMap location = { location } />
     </div>
-    <div className="container__column"></div>
-
-  {/* <MovieCard movies={ movies } location={ location } searchVal={ searchVal }/> */}
+    <div className="container__column container__column--right">
+    <MovieCard movies={ movies } location={ location } searchVal={ searchVal }/>
+    </div>
 
   </div>
 }

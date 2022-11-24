@@ -46,7 +46,9 @@ export default function MovieMap ({ location }) {
 
     map.current = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: 'mapbox://styles/rishita2605/clas5n21q008214ldcyd10rql',
+      style: 'mapbox://styles/rishita2605/clauqtw2m000815s19z7mhl8j',
+      // mapbox://styles/rishita2605/clauplkbh00gz14mpmxdryjsf
+      // mapbox://styles/rishita2605/clatc3iet000615oyl41h0lpk
       center: [-122.271356, 37.804456],
       zoom: 11
     })
