@@ -1,27 +1,28 @@
-import { React, useEffect, useRef, useState } from 'react'
+import { React, useEffect, useState, useRef } from 'react'
 
 import mapboxgl from '!mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
 import PropTypes from 'prop-types'
 
-export default function MovieMap ({ location }) {
+export default function MovieMap ({ location, zoom }) {
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN
   /* ++++++++++ Function State ++++++++++ */
-  const mapContainerRef = useRef(null)
-  const map = useRef(null)
   const [coords, setCoords] = useState([])
   const [mapMarker, setMapMarker] = useState([])
+  const map = useRef(null)
+  const mapContainerRef = useRef(null)
   /* ---------- Function State ---------- */
 
   /* ++++++++++ Function Constants ++++++++++ */
+  const style = 'mapbox://styles/rishita2605/clauqtw2m000815s19z7mhl8j'
   /* ---------- Function Constants ---------- */
 
   /* ++++++++++ Function Methods ++++++++++ */
 
   const getCoordinates = async () => {
-    const coordinates = []
-    console.log(location)
+    const coord = {}
 
     for (let loc of location) {
+      if (loc === 'no movie') continue
       // location with at __ street does not give proper result.
       loc = loc?.indexOf(' at ') === -1 ? loc : loc?.substring(0, loc?.indexOf(' at '))
       // location with between don't give proper result.
@@ -31,11 +32,10 @@ export default function MovieMap ({ location }) {
 
       const data = await response.json()
       const result = data?.features[0]?.center
-      if (result) coordinates.push(data?.features[0]?.center) // add the coordinates only if it not empty / undef
+      // add the coordinates only if it not empty / undef
+      if (result) coord[loc] = result
     }
-
-    console.log(coordinates)
-    setCoords(coordinates)
+    setCoords(coord)
   }
   /* ---------- Function Methods ---------- */
 
@@ -46,9 +46,9 @@ export default function MovieMap ({ location }) {
 
     map.current = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: 'mapbox://styles/rishita2605/clas5n21q008214ldcyd10rql',
-      center: [-122.271356, 37.804456],
-      zoom: 11
+      style,
+      center: [78.492857, 22.200661], // India's coordinates
+      zoom: 1
     })
 
     // Add navigation control (the +/- zoom buttons)
@@ -57,7 +57,6 @@ export default function MovieMap ({ location }) {
 
   // Get coordinates from the location name -> geocoding api
   useEffect(() => {
-    console.log(location.length)
     getCoordinates(location)
   }, [location])
 
@@ -69,21 +68,49 @@ export default function MovieMap ({ location }) {
     for (const m of mapMarker) m.remove() // removing markers of previous movie location.
 
     // Creating markers for the location.
-    for (const c of coords) {
-      markers.push(new mapboxgl.Marker().setLngLat(c).addTo(map.current))
+    for (const c in coords) {
+      markers.push(new mapboxgl.Marker({ color: '#EA1C24' }).setLngLat(coords[c]).setPopup(
+        new mapboxgl.Popup({
+          offset: 26,
+          className: 'marker-popup',
+          maxWidth: '140px'
+        }).setText(c)
+      ).addTo(map.current))
     }
     setMapMarker(markers)
 
     // for the animation when moving from one location to another.
     map.current.flyTo({
-      center: coords[0],
-      essential: true
+      center: coords[Object.keys(coords)[0]],
+      speed: 2.6,
+      curve: 1.26,
+      easing (t) {
+        return t
+      }
     })
   }, [coords, location])
+
+  // Zoom when want to visit is clicked
+  useEffect(() => {
+    if (!map.current) return
+    const center = coords[Object.keys(coords)[0]]
+    map.current.flyTo({
+      center,
+      zoom,
+      speed: 0.7,
+      curve: 1,
+      easing (t) {
+        return t
+      }
+    })
+  }, [zoom, coords])
   /* ---------- Side Effects ---------- */
 
   return <div className='map' ref={mapContainerRef}></div>
 }
 
 MovieMap.displayName = 'MovieMap'
-MovieMap.propTypes = { location: PropTypes.array.isRequired }
+MovieMap.propTypes = {
+  location: PropTypes.array.isRequired,
+  zoom: PropTypes.number.isRequired
+}

@@ -1,10 +1,17 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect, useRef } from 'react'
 
 import PropTypes from 'prop-types'
 
-export default function MovieCard ({ movies, location, searchVal }) {
+import { ReactComponent as CloseIcon } from '../../Icons/CloseIcon.svg'
+import { ReactComponent as HeartIcon } from '../../Icons/HeartIcon.svg'
+import OutlineBtn from '../OutlineBtn'
+
+export default function MovieCard ({ movies, location, searchVal, setZoom }) {
   /* ++++++++++ Function State ++++++++++ */
   const [display, setDisplay] = useState(false) // don't display card until something is searched
+  const [style, setStyle] = useState({
+    width: '0'
+  })
   const [cardContent, setCardContent] = useState({
     movieName: '',
     actors: [],
@@ -12,8 +19,42 @@ export default function MovieCard ({ movies, location, searchVal }) {
     productionCompany: '',
     releaseYear: 0
   })
+  const cardRef = useRef(null)
+  const containerRef = useRef(null)
   /* ---------- Function State ---------- */
 
+  /* ++++++++++ Function Constants ++++++++++ */
+  /* ---------- Function Constants ---------- */
+
+  /* ++++++++++ Function Methods ++++++++++ */
+  const closeCard = () => {
+    cardRef.current.classList.remove('is-card-visible')
+    containerRef.current.classList.remove('is-container-visible')
+    setDisplay(false)
+    // Hide card after map animation
+    setTimeout(() => {
+      setStyle({
+        width: '0'
+      })
+    }, 100)
+  }
+
+  const zoomOnClick = () => {
+    setZoom(Math.floor(Math.random() * 14) + 8)
+    setStyle('')
+  }
+  const displayCard = (displayVal) => {
+    setDisplay(displayVal)
+    cardRef.current.classList.add('is-card-visible')
+    containerRef.current.classList.add('is-container-visible')
+    // Display card after map animation
+    setTimeout(() => {
+      setStyle({
+        width: '29vw'
+      })
+    }, 800)
+  }
+  /* ---------- Function Methods ---------- */
   /* ++++++++++ Side Effects ++++++++++ */
   // Only the location state changes when a value is searched
   useEffect(() => {
@@ -27,58 +68,85 @@ export default function MovieCard ({ movies, location, searchVal }) {
         movieData.releaseYear = m.release_year
         movieData.location = location.filter((l) => { return !!l })
         movieData.actors = movieData.actors.filter((a) => { return !!a })
-        setDisplay(true)
+        displayCard(true)
       }
     }
+
+    if (location[0] === 'no movie') {
+      displayCard(false)
+    }
+
     setCardContent(movieData)
   }, [location])
   /* ---------- Side Effects ---------- */
-
-  console.log({ cardContent })
-  return (display &&
-  <div className='card-container'>
-  <div className='movie-card'>
-    <div className="movie-card__header">Movie: {cardContent.movieName}</div>
-    <div className="movie-card__body">
-      {
-        cardContent.releaseYear &&
-        <div className='movie-card__body__realease-year'>
-          <b>Released on:</b> {cardContent.releaseYear}
-        </div>
-      }
-      <div className='movie-card__body__movie-info'>
-         {cardContent.director && (<b>Directed by: {cardContent.director} || </b>)}
-         {cardContent.productionCompany && (<b>Produced by: {cardContent.productionCompany}</b>)}
-      </div>
-      {
-        cardContent.location.length > 0 &&
-        <div className='movie-card__body__location'>
-          <b>Location: {' '}</b>
-          {cardContent.location.map((elem, index, array) => {
-            const separator = index === array.length - 1 ? '' : ', '
-            return elem + separator
-          })}
-        </div>
-      }
-      {
-        cardContent.actors.length > 0 &&
-        <div className='movie-card__body__actors'>
-         <b> Actors: {' '}</b>
-          {cardContent.actors.map((elem, index, array) => {
-            const separator = index === array.length - 1 ? '' : ', '
-            return elem + separator
-          })}
-        </div>
-      }
+  console.log({ style })
+  return (
+  <div className='card-container' ref={containerRef}
+  style={ typeof style === 'string' ? { width: '0' } : style }> {/* style check to prevent errors during re-rendering */}
+    <div className="card" ref={cardRef}>
+    <div className="close">
+      <button className="close__btn" onClick={ closeCard }>
+        <CloseIcon className='close__btn__icon'/>
+      </button>
     </div>
-  </div>
+    <div className='movie-card'>
+      <div className="movie-card__header">
+        <div className="movie-card__header--title">{cardContent?.movieName}</div>
+        {
+          cardContent?.releaseYear &&
+          <div className="movie-card__header--year">{cardContent?.releaseYear}</div>
+        }
+      </div>
+      <div className="movie-card__body">
+        {
+          cardContent?.director && <div className="movie-card__body__field">
+            <span className='movie-card__body__field--label'> Director: {' '}</span> {cardContent?.director}
+          </div>
+        }
+        {
+          cardContent?.director && <div className="movie-card__body__field">
+            <span className='movie-card__body__field--label'> Production Company: {' '}</span> {cardContent?.productionCompany}
+          </div>
+        }
+        {
+          cardContent?.location?.length > 0 &&
+          <div className='movie-card__body__field'>
+            <span className='movie-card__body__field--label'> Shot in: {' '}</span>
+            {cardContent?.location?.map((elem, index, array) => {
+              const separator = index === array.length - 1 ? '' : ', '
+              return elem + separator
+            })}
+          </div>
+        }
+        {
+          cardContent?.actors?.length > 0 &&
+          <div className='movie-card__body__field'>
+          <span className='movie-card__body__field--label'> Cast: {' '}</span>
+            {cardContent?.actors?.map((elem, index, array) => {
+              const separator = index === array.length - 1 ? '' : ', '
+              return elem + separator
+            })}
+          </div>
+        }
+      </div>
+    </div>
+    {
+      display
+        ? (
+        <OutlineBtn btnOnClick={zoomOnClick} btnText='Want to Visit' Icon={HeartIcon} />
+          )
+        : (<div className='no-movie'>Uh oh. No such movie found!</div>)
+    }
+
+    </div>
   </div>
   )
 }
 
 MovieCard.displayName = 'MovieCard'
 MovieCard.propTypes = {
-  movies: PropTypes.array.isRequired,
   location: PropTypes.array.isRequired,
-  searchVal: PropTypes.string.isRequired
+  movies: PropTypes.array.isRequired,
+  searchVal: PropTypes.string.isRequired,
+  setZoom: PropTypes.func.isRequired
 }

@@ -4,7 +4,7 @@ import HomePage from './Pages/HomePage'
 
 function App () {
   return (
-    <div className="App">
+    <div className="App dark">
       <HomePage />
     </div>
   )

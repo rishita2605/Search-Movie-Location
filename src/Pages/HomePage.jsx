@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import MovieCard from '../Components/MovieCard'
 
-// import DeckMap from '../Components/DeckMap'
+import MovieCard from '../Components/MovieCard'
 import MovieMap from '../Components/MovieMap'
 import Search from '../Components/Search'
 import './HomePage.scss'
@@ -11,6 +10,7 @@ export default function HomePage () {
   const [searchVal, setSearchVal] = useState('') // Defining search value so that it can be accessed in Map component as well.
   const [movies, setMovies] = useState([])
   const [location, setLocation] = useState([])
+  const [zoom, setZoom] = useState(2)
   /* ---------- Function State ---------- */
 
   /* ++++++++++ Side Effects ++++++++++ */
@@ -31,18 +31,27 @@ export default function HomePage () {
   /* ---------- Function Methods ---------- */
 
   /* ++++++++++ Function Render Method ++++++++++ */
-  return <div className='home-page'>
-  <Search
-  movies={ movies }
-  searchVal = { searchVal } setSearchVal = { setSearchVal }
-  location = { location } setLocation = { setLocation } />
-
-  <MovieCard movies={ movies } location={ location } searchVal={ searchVal }/>
-
-  <MovieMap location = { location } />
+  return <div className='home-page container'>
+    <div className="container__column container__column--left">
+    <Search
+      movies={ movies }
+      searchVal = { searchVal } setSearchVal = { setSearchVal }
+      location = { location } setLocation = { setLocation } />
+    <MovieMap
+      location = { location }
+      setLocation = { setLocation }
+      zoom = { zoom }
+      setZoom = { setZoom }/>
+    </div>
+    <div className="container__column container__column--right">
+    <MovieCard
+      movies={ movies }
+      location={ location }
+      searchVal={ searchVal }
+      setZoom = { setZoom }/>
+    </div>
 
   </div>
 }
 
 HomePage.displayName = 'HomePage'
-// HomePage.propTypes = { propname: PropTypes.propType.isRequired,};
