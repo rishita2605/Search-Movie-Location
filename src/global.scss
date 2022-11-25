@@ -67,6 +67,44 @@
 
 }
 
+/* ++++++++++ Reset ++++++++++ */
+/* Reset styles and use border box */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Raleway', sans-serif;
+}
+
+body {
+  background-color: var(--global-background);
+  color: var(--global-text);
+}
+
+/* Styling text when it is selected by user */
+::selection {
+  color: var(--global-white);
+  background: var(--global-red);
+}
+
+/* ++++++++++ Scrollbar Style ++++++++++ */
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: linear-gradient(80deg, rgba(18, 18, 18, 0.098), rgba(33, 33, 33, 0));
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, var(--global-red), var(--global-light-red));
+  border-radius: 4em;
+  height: 1.5em;
+}
+
 @media (max-width: 768px) {
   .container {
     display: grid;
