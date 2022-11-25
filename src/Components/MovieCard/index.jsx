@@ -9,6 +9,9 @@ import OutlineBtn from '../OutlineBtn'
 export default function MovieCard ({ movies, location, searchVal, setZoom }) {
   /* ++++++++++ Function State ++++++++++ */
   const [display, setDisplay] = useState(false) // don't display card until something is searched
+  const [style, setStyle] = useState({
+    width: '0'
+  })
   const [cardContent, setCardContent] = useState({
     movieName: '',
     actors: [],
@@ -28,13 +31,30 @@ export default function MovieCard ({ movies, location, searchVal, setZoom }) {
     cardRef.current.classList.remove('is-card-visible')
     containerRef.current.classList.remove('is-container-visible')
     setDisplay(false)
+    // Hide card after map animation
+    setTimeout(() => {
+      setStyle({
+        width: '0'
+      })
+    }, 100)
   }
 
   const zoomOnClick = () => {
     setZoom(Math.floor(Math.random() * 14) + 8)
+    setStyle('')
+  }
+  const displayCard = (displayVal) => {
+    setDisplay(displayVal)
+    cardRef.current.classList.add('is-card-visible')
+    containerRef.current.classList.add('is-container-visible')
+    // Display card after map animation
+    setTimeout(() => {
+      setStyle({
+        width: '29vw'
+      })
+    }, 800)
   }
   /* ---------- Function Methods ---------- */
-
   /* ++++++++++ Side Effects ++++++++++ */
   // Only the location state changes when a value is searched
   useEffect(() => {
@@ -48,24 +68,21 @@ export default function MovieCard ({ movies, location, searchVal, setZoom }) {
         movieData.releaseYear = m.release_year
         movieData.location = location.filter((l) => { return !!l })
         movieData.actors = movieData.actors.filter((a) => { return !!a })
-        setDisplay(true)
-        cardRef.current.classList.add('is-card-visible')
-        containerRef.current.classList.add('is-container-visible')
+        displayCard(true)
       }
     }
 
     if (location[0] === 'no movie') {
-      setDisplay(false)
-      cardRef.current.classList.add('is-card-visible')
-      containerRef.current.classList.add('is-container-visible')
+      displayCard(false)
     }
 
     setCardContent(movieData)
   }, [location])
   /* ---------- Side Effects ---------- */
-
+  console.log({ style })
   return (
-  <div className='card-container' ref={containerRef}>
+  <div className='card-container' ref={containerRef}
+  style={ typeof style === 'string' ? { width: '0' } : style }> {/* style check to prevent errors during re-rendering */}
     <div className="card" ref={cardRef}>
     <div className="close">
       <button className="close__btn" onClick={ closeCard }>

@@ -29,6 +29,15 @@
   }
 }
 
+@media (min-width: 576px) {
+
+  .search {
+    &__container {
+      padding: 2vh 1vw;
+    }
+  }
+}
+
 .search {
 
   position: relative;
@@ -40,7 +49,6 @@
     min-width: 24rem;
     position: relative;
     height: 10vh;
-    padding: 2vh 1vw;
     display: flex;
     align-items: center;
 
@@ -131,12 +139,21 @@
 
 @media (min-width: 768px) {
   .card-container {
-    width: 0px;
+    transform: scaleX(0);
+    transform-origin: right;
 
     .card {
       margin-left: 1rem;
       padding: 1.5vh 1vw 0 2vw;
       transform: translateX(30vw); // animating this
+
+      .close {
+        &__btn {
+          cursor: pointer;
+          transform: rotateZ(0);
+          transition: transform 350ms ease-in;
+        }
+      }
     }
 
     .is-card-visible {
@@ -145,8 +162,8 @@
   }
 
   .is-container-visible {
-    width: 29vw;
-    min-width: fit-content;
+    transition: all 800ms linear 100ms;
+    transform: scaleX(1);
   }
 }
 
@@ -154,9 +171,10 @@
 $card-header-font: 1.36rem;
 
 .card-container {
+  // border: 2px solid red;
   height: 100%;
   overflow: hidden;
-  transition: width 800ms linear;
+  transition: transform 500ms ease 600ms;
 
   // add overflow hidden when card is hidden 
   .card {
@@ -167,7 +185,7 @@ $card-header-font: 1.36rem;
 
     //features being animated
     opacity: 0;
-    transition: transform 2200ms cubic-bezier(.11, .87, 1, .99), opacity 4500ms cubic-bezier(.11, .87, 1, .99);
+    transition: transform 200ms ease-in-out 200ms, opacity 1500ms ease 1500ms;
 
     .movie-card {
       font-family: 'Roboto', sans-serif;
@@ -208,8 +226,6 @@ $card-header-font: 1.36rem;
       &__btn {
         @include remove-styles();
         cursor: pointer;
-        transform: rotateZ(0);
-        transition: transform 350ms ease-in;
 
         #icon {
           opacity: 0.6;

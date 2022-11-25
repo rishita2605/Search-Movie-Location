@@ -1,8 +1,10 @@
 .App {
   height: 100vh;
   width: 100vw;
+
   padding: var(--global-vertical-padding, 3rem) var(--global-horizontal-padding, 5rem);
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 
