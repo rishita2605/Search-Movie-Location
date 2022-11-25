@@ -3,6 +3,14 @@
  [![](https://img.shields.io/badge/Hosted_On_Netlify-informational?style=for-the-badge&logo=netlify&labelColor=dc143c&color=ea1c24&logoColor=ffffff)][1] 
  
  [1]: https://www.linkedin.com/in/rishita-raha/](https://taupe-tapioca-400ff7.netlify.app/
+ 
+## Technologies used 
+![](https://img.shields.io/badge/React-informational?style=for-the-badge&logo=react&labelColor=dc143c&color=ea1c24&logoColor=ffffff) &nbsp;
+![](https://img.shields.io/badge/SCSS-informational?style=for-the-badge&logo=sass&labelColor=dc143c&color=ea1c24&logoColor=ffffff)
+
+- APIs Used - SF Movies API, MapBox
+- Package Installer - npm
+
 ## Problem Statement
 
 Create a service that shows on a map where movies have been filmed in San
@@ -32,3 +40,8 @@ The solution is focused on **front-end.**
 3. To use loaders for processes that takes more time.
 4. To have a light theme along with the dark theme.
 
+
+## To run this project locally 
+- Clone the repo 
+- Install the required packages by running `npm install`
+- Finally do `npm start` 
