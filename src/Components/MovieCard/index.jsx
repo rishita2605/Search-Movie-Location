@@ -31,17 +31,17 @@ export default function MovieCard ({ movies, location, searchVal, setZoom }) {
     cardRef.current.classList.remove('is-card-visible')
     containerRef.current.classList.remove('is-container-visible')
     setDisplay(false)
-    // Hide card after map animation
-    setTimeout(() => {
-      setStyle({
-        width: '0'
-      })
-    }, 100)
+    // Hide card
+    setStyle({
+      width: '0'
+    })
   }
 
   const zoomOnClick = () => {
-    setZoom(Math.floor(Math.random() * 14) + 8)
-    setStyle('')
+    setZoom(Math.floor(Math.random() * 8) + 6)
+    setStyle({
+      width: '29vw'
+    })
   }
   const displayCard = (displayVal) => {
     setDisplay(displayVal)
@@ -82,7 +82,7 @@ export default function MovieCard ({ movies, location, searchVal, setZoom }) {
   console.log({ style })
   return (
   <div className='card-container' ref={containerRef}
-  style={ typeof style === 'string' ? { width: '0' } : style }> {/* style check to prevent errors during re-rendering */}
+  style={ style }>
     <div className="card" ref={cardRef}>
     <div className="close">
       <button className="close__btn" onClick={ closeCard }>

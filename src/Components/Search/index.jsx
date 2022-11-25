@@ -129,7 +129,7 @@ export default function Search ({ movies, searchVal, setSearchVal, setLocation }
       />
     </div>
     <SearchIcon className='icon-container'/>
-    <SearchBtn searchMovie = { searchMovie }/>
+    <SearchBtn onClickBtn= { searchMovie }/>
   </div>
   </div>
   )

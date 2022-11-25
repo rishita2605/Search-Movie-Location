@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 
 // import './SearchBtn.css'
 
-export default function SearchBtn ({ searchMovie }) {
-  return <button className='search__btn' onClick={(evt) => searchMovie(evt)}>Search</button>
+export default function SearchBtn ({ onClickBtn }) {
+  return <button className='search__btn' onClick={onClickBtn}>Search</button>
 }
 SearchBtn.displayName = 'SearchBtn'
-SearchBtn.propTypes = { searchMovie: PropTypes.func.isRequired }
+SearchBtn.propTypes = { onClickBtn: PropTypes.func.isRequired }
