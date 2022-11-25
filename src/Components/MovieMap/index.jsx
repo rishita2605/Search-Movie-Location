@@ -1,27 +1,28 @@
-import { React, useEffect, useRef, useState } from 'react'
+import { React, useEffect, useState, useRef } from 'react'
 
 import mapboxgl from '!mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
 import PropTypes from 'prop-types'
 
-export default function MovieMap ({ location }) {
+export default function MovieMap ({ location, zoom }) {
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN
   /* ++++++++++ Function State ++++++++++ */
-  const mapContainerRef = useRef(null)
-  const map = useRef(null)
   const [coords, setCoords] = useState([])
   const [mapMarker, setMapMarker] = useState([])
+  const map = useRef(null)
+  const mapContainerRef = useRef(null)
   /* ---------- Function State ---------- */
 
   /* ++++++++++ Function Constants ++++++++++ */
+  const style = 'mapbox://styles/rishita2605/clauqtw2m000815s19z7mhl8j'
   /* ---------- Function Constants ---------- */
 
   /* ++++++++++ Function Methods ++++++++++ */
 
   const getCoordinates = async () => {
     const coord = {}
-    console.log(location)
 
     for (let loc of location) {
+      if (loc === 'no movie') continue
       // location with at __ street does not give proper result.
       loc = loc?.indexOf(' at ') === -1 ? loc : loc?.substring(0, loc?.indexOf(' at '))
       // location with between don't give proper result.
@@ -34,8 +35,6 @@ export default function MovieMap ({ location }) {
       // add the coordinates only if it not empty / undef
       if (result) coord[loc] = result
     }
-
-    console.log(coord)
     setCoords(coord)
   }
   /* ---------- Function Methods ---------- */
@@ -47,7 +46,7 @@ export default function MovieMap ({ location }) {
 
     map.current = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: 'mapbox://styles/rishita2605/clauqtw2m000815s19z7mhl8j',
+      style,
       // mapbox://styles/rishita2605/clauplkbh00gz14mpmxdryjsf
       // mapbox://styles/rishita2605/clatc3iet000615oyl41h0lpk
       center: [-122.271356, 37.804456],
@@ -60,7 +59,6 @@ export default function MovieMap ({ location }) {
 
   // Get coordinates from the location name -> geocoding api
   useEffect(() => {
-    console.log(location.length)
     getCoordinates(location)
   }, [location])
 
@@ -85,14 +83,26 @@ export default function MovieMap ({ location }) {
 
     // for the animation when moving from one location to another.
     map.current.flyTo({
-      center: coords[Object.keys(coords)[0]],
-      essential: true
+      center: coords[Object.keys(coords)[0]]
     })
   }, [coords, location])
+
+  // Zoom when want to visit is clicked
+  useEffect(() => {
+    if (!map.current) return
+    const center = coords[Object.keys(coords)[0]]
+    map.current.flyTo({
+      center,
+      zoom
+    })
+  }, [zoom, coords])
   /* ---------- Side Effects ---------- */
 
   return <div className='map' ref={mapContainerRef}></div>
 }
 
 MovieMap.displayName = 'MovieMap'
-MovieMap.propTypes = { location: PropTypes.array.isRequired }
+MovieMap.propTypes = {
+  location: PropTypes.array.isRequired,
+  zoom: PropTypes.number.isRequired
+}

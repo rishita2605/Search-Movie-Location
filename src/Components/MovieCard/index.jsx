@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 
 import { ReactComponent as CloseIcon } from '../../Icons/CloseIcon.svg'
 import { ReactComponent as HeartIcon } from '../../Icons/HeartIcon.svg'
-export default function MovieCard ({ movies, location, searchVal }) {
+import OutlineBtn from '../OutlineBtn'
+
+export default function MovieCard ({ movies, location, searchVal, setZoom }) {
   /* ++++++++++ Function State ++++++++++ */
   const [display, setDisplay] = useState(false) // don't display card until something is searched
   const [cardContent, setCardContent] = useState({
@@ -27,6 +29,10 @@ export default function MovieCard ({ movies, location, searchVal }) {
     containerRef.current.classList.remove('is-container-visible')
     setDisplay(false)
   }
+
+  const zoomOnClick = () => {
+    setZoom(Math.floor(Math.random() * 14) + 8)
+  }
   /* ---------- Function Methods ---------- */
 
   /* ++++++++++ Side Effects ++++++++++ */
@@ -43,16 +49,21 @@ export default function MovieCard ({ movies, location, searchVal }) {
         movieData.location = location.filter((l) => { return !!l })
         movieData.actors = movieData.actors.filter((a) => { return !!a })
         setDisplay(true)
-        console.log(display)
         cardRef.current.classList.add('is-card-visible')
         containerRef.current.classList.add('is-container-visible')
       }
     }
+
+    if (location[0] === 'no movie') {
+      setDisplay(false)
+      cardRef.current.classList.add('is-card-visible')
+      containerRef.current.classList.add('is-container-visible')
+    }
+
     setCardContent(movieData)
   }, [location])
   /* ---------- Side Effects ---------- */
 
-  console.log({ cardContent })
   return (
   <div className='card-container' ref={containerRef}>
     <div className="card" ref={cardRef}>
@@ -102,10 +113,14 @@ export default function MovieCard ({ movies, location, searchVal }) {
         }
       </div>
     </div>
-    <button className="outline-btn">
-      <span className="outline-btn__text">Want to Visit</span>
-      <div className="outline-btn__icon"><HeartIcon /></div>
-    </button>
+    {
+      display
+        ? (
+        <OutlineBtn btnOnClick={zoomOnClick} btnText='Want to Visit' Icon={HeartIcon} />
+          )
+        : (<div className='no-movie'>Uh oh. No such movie found!</div>)
+    }
+
     </div>
   </div>
   )
@@ -113,7 +128,8 @@ export default function MovieCard ({ movies, location, searchVal }) {
 
 MovieCard.displayName = 'MovieCard'
 MovieCard.propTypes = {
-  movies: PropTypes.array.isRequired,
   location: PropTypes.array.isRequired,
-  searchVal: PropTypes.string.isRequired
+  movies: PropTypes.array.isRequired,
+  searchVal: PropTypes.string.isRequired,
+  setZoom: PropTypes.func.isRequired
 }

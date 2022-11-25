@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react'
 
 import Autocomplete from 'react-autocomplete'
 import PropTypes from 'prop-types'
+import useMeasure from 'react-use-measure'
 
 import SearchBtn from '../SearchBtn'
 import { ReactComponent as SearchIcon } from '../../Icons/SearchIcon.svg'
@@ -9,6 +10,7 @@ import { ReactComponent as SearchIcon } from '../../Icons/SearchIcon.svg'
 export default function Search ({ movies, searchVal, setSearchVal, setLocation }) {
   /* ++++++++++ Function State ++++++++++ */
   const [movieTitle, setMovieTitle] = useState([])
+  const [ref, bounds] = useMeasure()
   /* ---------- Function State ---------- */
 
   /* ++++++++++ Function Constants ++++++++++ */
@@ -17,10 +19,10 @@ export default function Search ({ movies, searchVal, setSearchVal, setLocation }
     maxHeight: '30vh',
     position: 'absolute',
     overflow: 'auto',
-    width: '39.5vw',
+    width: bounds.width,
     scrollBehavior: 'smooth',
     left: 0,
-    top: '10vh' // height of search container
+    top: bounds.height // height of search container
   }
 
   const menuItemStyle = {
@@ -61,10 +63,15 @@ export default function Search ({ movies, searchVal, setSearchVal, setLocation }
       setSearchVal(event.target.value)
     }
 
+    const loc = []
     if (event.type === 'click' || event.key === 'Enter') {
-      const loc = []
       for (const m of movies) {
         if (m.title === searchVal) loc.push(m.locations)
+      }
+
+      // so that the movie card is displayed even when no movie found.
+      if (loc?.length === 0) {
+        loc.push('no movie')
       }
       setLocation(loc)
     }
@@ -74,7 +81,7 @@ export default function Search ({ movies, searchVal, setSearchVal, setLocation }
   /* ++++++++++ Function Render Method ++++++++++ */
   return (
   <div className="search">
-  <div className = 'search__container'>
+  <div className = 'search__container' ref={ref}>
     <div className="autocomplete-container">
       <Autocomplete
       items = {movieTitle}
@@ -130,9 +137,9 @@ export default function Search ({ movies, searchVal, setSearchVal, setLocation }
 
 Search.displayName = 'Search'
 Search.propTypes = {
+  location: PropTypes.array.isRequired,
   movies: PropTypes.array.isRequired,
   searchVal: PropTypes.string.isRequired,
   setSearchVal: PropTypes.func.isRequired,
-  location: PropTypes.array.isRequired,
   setLocation: PropTypes.func.isRequired
 }

@@ -10,6 +10,7 @@ export default function HomePage () {
   const [searchVal, setSearchVal] = useState('') // Defining search value so that it can be accessed in Map component as well.
   const [movies, setMovies] = useState([])
   const [location, setLocation] = useState([])
+  const [zoom, setZoom] = useState(2)
   /* ---------- Function State ---------- */
 
   /* ++++++++++ Side Effects ++++++++++ */
@@ -18,7 +19,6 @@ export default function HomePage () {
       .then((response) => response.json())
       .then((data) => {
         setMovies(data)
-        console.log(movies)
       })
   }, [])
 
@@ -37,14 +37,21 @@ export default function HomePage () {
       movies={ movies }
       searchVal = { searchVal } setSearchVal = { setSearchVal }
       location = { location } setLocation = { setLocation } />
-    <MovieMap location = { location } />
+    <MovieMap
+      location = { location }
+      setLocation = { setLocation }
+      zoom = { zoom }
+      setZoom = { setZoom }/>
     </div>
     <div className="container__column container__column--right">
-    <MovieCard movies={ movies } location={ location } searchVal={ searchVal }/>
+    <MovieCard
+      movies={ movies }
+      location={ location }
+      searchVal={ searchVal }
+      setZoom = { setZoom }/>
     </div>
 
   </div>
 }
 
 HomePage.displayName = 'HomePage'
-// HomePage.propTypes = { propname: PropTypes.propType.isRequired,};
