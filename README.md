@@ -1,5 +1,8 @@
 # **SF Movies**
 
+ [![](https://img.shields.io/badge/Hosted_On_Netlify-informational?style=for-the-badge&logo=netlify&labelColor=dc143c&color=ea1c24&logoColor=ffffff)][1] 
+ 
+ [1]: https://www.linkedin.com/in/rishita-raha/](https://taupe-tapioca-400ff7.netlify.app/
 ## Problem Statement
 
 Create a service that shows on a map where movies have been filmed in San
