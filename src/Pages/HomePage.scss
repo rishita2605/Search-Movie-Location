@@ -1,27 +1,20 @@
-@mixin remove-styles {
-  border: none;
-  text-decoration: none;
-  background: none;
+@import '../global.scss';
 
-  &:focus {
-    outline: none;
+@media (min-width:769px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+
+    &__column {
+      height: 100%;
+    }
   }
 }
 
-@mixin add-box-features($box-border-radius) {
-  border-radius: $box-border-radius;
-  box-shadow: -5px 10px 20px rgba(7, 7, 7, 0.595);
-}
-
 .container {
-  border: 2px solid teal;
-  display: grid;
-  grid-template-columns: 1fr fit-content(13px);
 
   &__column {
-    // border: 2px solid palevioletred;
     display: grid;
-    height: 100%;
     position: relative;
 
     &--left {
@@ -61,9 +54,9 @@
     font-family: 'Raleway', sans-serif;
     padding: 0.5em 0;
     color: var(--global-text);
-    font-size: 1.2rem;
+    font-size: var(--font-size);
     width: 22vw;
-    min-width: 12em;
+    min-width: 9em;
   }
 
   &__menu-item {
@@ -87,11 +80,11 @@
     cursor: pointer;
     background-color: var(--global-red);
     color: var(--global-white);
-    padding: 0.8em 2.6em;
+    padding: 0.6em 2.6em;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.09rem;
-    font-size: 1.01rem;
+    font-size: var(--font-size);
     border-radius: 5em;
     opacity: 0.8;
     box-shadow: -2px 5px 14px rgba(0, 0, 0, 0), 2px 5px 14px rgba(0, 0, 0, 0);
@@ -124,15 +117,40 @@
 
 }
 
+@media (min-width: 768px) {
+  .map {
+    height: 92%; // 100%;
+    margin: auto 0 0 0;
+  }
+}
+
 .map {
-  height: 92%; // 100%;
-  margin: auto 0 0 0;
   width: 100%; // change this for animation when box appears
   @include add-box-features(1.4rem);
 }
 
+@media (min-width: 768px) {
+  .card-container {
+    width: 0px;
+
+    .card {
+      margin-left: 1rem;
+      padding: 1.5vh 1vw 0 2vw;
+      transform: translateX(30vw); // animating this
+    }
+
+    .is-card-visible {
+      transform: translateX(0);
+    }
+  }
+
+  .is-container-visible {
+    width: 29vw;
+    min-width: fit-content;
+  }
+}
+
 .card-container {
-  width: 0px;
   height: 100%;
   overflow: hidden;
   transition: width 800ms linear;
@@ -140,15 +158,12 @@
   // add overflow hidden when card is hidden 
   .card {
 
-    padding: 1.5vh 1vw 0 2vw;
-    margin-left: 1rem;
     height: 100%;
     background-color: var(--global-medium-grey);
     @include add-box-features(1.4rem);
 
     //features being animated
     opacity: 0;
-    transform: translateX(30vw); // animating this
     transition: transform 2200ms cubic-bezier(.11, .87, 1, .99), opacity 4500ms cubic-bezier(.11, .87, 1, .99);
 
     .movie-card {
@@ -213,17 +228,12 @@
   }
 
   .is-card-visible {
-    transform: translateX(0);
     opacity: 1;
   }
 
 }
 
-.is-container-visible {
-  width: 29vw;
-  min-width: 24rem;
-  min-width: fit-content;
-}
+
 
 .marker-popup {
   box-shadow: 10px -10px 8px var(--grey-shadow);
@@ -231,7 +241,7 @@
   .mapboxgl-popup-content {
     font-family: 'Roboto', sans-serif;
     padding: 0.5rem 1rem;
-    font-size: 1.1rem;
+    font-size: var(--font-size);
     border-radius: 0.5em;
   }
 
@@ -244,7 +254,7 @@
   @include remove-styles();
   display: flex;
   color: var(--global-white);
-  font-size: 1.2rem;
+  font-size: var(--font-size);
   justify-content: center;
   align-items: center;
   width: 95%;

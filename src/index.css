@@ -2,6 +2,8 @@
   --global-horizontal-padding: 5rem; 
   --global-vertical-padding: 3rem;
 
+  --font-size: 1.15rem;
+
   --global-white: rgb(255, 244, 255);
   --global-red: rgb(234, 28, 36);
   --global-light-red: rgb(251, 98, 76); 
@@ -34,11 +36,14 @@ body{
   color: var(--global-text);
 }
 
+/* Styling text when it is selected by user */
 ::selection{
   color: var(--global-white);
   background: var(--global-red);
 }
 
+
+/* Styling Scrollbar`*/
 ::-webkit-scrollbar{
   width: 14px;
 }
