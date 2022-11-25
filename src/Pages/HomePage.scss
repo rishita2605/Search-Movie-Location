@@ -34,7 +34,16 @@
   .search {
     &__container {
       padding: 2vh 1vw;
+      min-width: 24rem;
     }
+
+
+    &__btn {
+
+      padding: 0.6em 2.6em;
+      letter-spacing: 0.09rem;
+    }
+
   }
 }
 
@@ -46,7 +55,6 @@
   &__container {
     @include add-box-features(0.9rem);
     width: fit-content;
-    min-width: 24rem;
     position: relative;
     height: 10vh;
     display: flex;
@@ -88,10 +96,8 @@
     cursor: pointer;
     background-color: var(--global-red);
     color: var(--global-white);
-    padding: 0.6em 2.6em;
     font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 0.09rem;
     font-size: var(--font-size);
     border-radius: 5em;
     opacity: 0.8;

@@ -1,25 +1,3 @@
-:root{
-  --global-horizontal-padding: 5rem; 
-  --global-vertical-padding: 3rem;
-
-  --font-size: 1.15rem;
-
-  --global-white: rgb(255, 244, 255);
-  --global-red: rgb(234, 28, 36);
-  --global-light-red: rgb(251, 98, 76); 
-  --global-dark-grey: rgb(25, 26, 35);
-  --global-medium-grey:  rgb(41, 44, 55); /*rgb(34, 37, 47)*/
-  --global-light-grey: rgb(146, 139, 139);
-
-  --grey-shadow: rgba(34, 37, 47, 0.426);
-  --white-shadow: rgba(255, 244, 255, 0.676);
-  --red-shadow: rgba(234, 28, 35, 0.3);
-  --light-red-shadow: rgba(251, 99, 76, 0.2);
-
-  --global-background: var(--global-dark-grey);
-  --global-text: var(--global-white);
-}
-
 /* Reset styles and use border box */
 *{
   box-sizing: border-box;

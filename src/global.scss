@@ -1,3 +1,4 @@
+/* ++++++++++ Mixins ++++++++++ */
 @mixin remove-styles {
   border: none;
   text-decoration: none;
@@ -13,10 +14,28 @@
   box-shadow: -5px 10px 20px rgba(7, 7, 7, 0.595);
 }
 
-@media (max-width: 768px) {
-  * {
-    // border: 2px solid blue;
-  }
+/* ++++++++++ Variables ++++++++++ */
+:root {
+  --global-horizontal-padding: 5rem;
+  --global-vertical-padding: 3rem;
+
+  --font-size: 1.15rem;
+
+  --global-white: rgb(255, 244, 255);
+  --global-red: rgb(234, 28, 36);
+  --global-light-red: rgb(251, 98, 76);
+  --global-dark-grey: rgb(25, 26, 35);
+  --global-medium-grey: rgb(41, 44, 55);
+  /*rgb(34, 37, 47)*/
+  --global-light-grey: rgb(146, 139, 139);
+
+  --grey-shadow: rgba(34, 37, 47, 0.426);
+  --white-shadow: rgba(255, 244, 255, 0.676);
+  --red-shadow: rgba(234, 28, 35, 0.3);
+  --light-red-shadow: rgba(251, 99, 76, 0.2);
+
+  --global-background: var(--global-dark-grey);
+  --global-text: var(--global-white);
 }
 
 @media (max-width: 900px) {
@@ -34,7 +53,7 @@
 
 @media (max-width: 576px) {
   :root {
-    --global-horizontal-padding: 0;
+    --global-horizontal-padding: 1vw;
     --global-vertical-padding: 5vh;
 
     --font-size: 0.95rem;
@@ -57,7 +76,12 @@
     height: fit-content;
 
     &__column--left {
-      height: 80vh;
+      height: 70vh;
+    }
+
+    &__column--left,
+    &__column--right {
+      place-items: center;
     }
   }
 }
@@ -114,6 +138,13 @@
   .search {
     &__container {
       padding: 0;
+    }
+
+    &__btn {
+
+      padding: 1.4vh 6vw;
+      font-weight: 400;
+      margin: 0 5.8em;
     }
   }
 }
