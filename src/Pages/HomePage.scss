@@ -35,6 +35,7 @@
     &__container {
       padding: 2vh 1vw;
       min-width: 24rem;
+      width: fit-content;
     }
 
 
@@ -42,6 +43,11 @@
 
       padding: 0.6em 2.6em;
       letter-spacing: 0.09rem;
+    }
+
+    &__input {
+      width: 22vw;
+      min-width: 9em;
     }
 
   }
@@ -54,7 +60,6 @@
 
   &__container {
     @include add-box-features(0.9rem);
-    width: fit-content;
     position: relative;
     height: 10vh;
     display: flex;
@@ -71,8 +76,6 @@
     padding: 0.5em 0;
     color: var(--global-text);
     font-size: var(--font-size);
-    width: 22vw;
-    min-width: 9em;
   }
 
   &__menu-item {

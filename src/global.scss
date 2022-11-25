@@ -136,16 +136,26 @@
 //Search 
 @media (max-width: 576px) {
   .search {
+
     &__container {
       padding: 0;
+      width: 80vw;
+      height: fit-content;
     }
 
     &__btn {
-
       padding: 1.4vh 6vw;
       font-weight: 400;
-      margin: 0 5.8em;
     }
+
+    &__input {
+      margin: 0 1vw;
+    }
+
+    .icon-container {
+      display: none;
+    }
+
   }
 }
 
