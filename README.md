@@ -32,6 +32,7 @@ The solution is focused on **front-end.**
 9. Followed BEM naming convention for SCSS. 
 10. Also, tried to keep the components as modular as possible. 
 11. The layout is **responsive -** the website works well on devices ranging from desktops to tablet to mobile phones. 
+12. Added custom markers on the map. On clicking the markers one can view the place name on a tooltip. 
 
 ## Scope of Improvement
 
