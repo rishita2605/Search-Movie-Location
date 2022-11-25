@@ -4,7 +4,7 @@ import Autocomplete from 'react-autocomplete'
 import PropTypes from 'prop-types'
 import useMeasure from 'react-use-measure'
 
-import SearchBtn from '../SearchBtn'
+import SolidBtn from '../SolidBtn'
 import { ReactComponent as SearchIcon } from '../../Icons/SearchIcon.svg'
 
 export default function Search ({ movies, searchVal, setSearchVal, setLocation }) {
@@ -129,7 +129,7 @@ export default function Search ({ movies, searchVal, setSearchVal, setLocation }
       />
     </div>
     <SearchIcon className='icon-container'/>
-    <SearchBtn onClickBtn= { searchMovie }/>
+    <SolidBtn onClickBtn = { searchMovie } btnText = 'Search'/>
   </div>
   </div>
   )

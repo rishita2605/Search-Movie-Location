@@ -38,13 +38,6 @@
       width: fit-content;
     }
 
-
-    &__btn {
-
-      padding: 0.6em 2.6em;
-      letter-spacing: 0.09rem;
-    }
-
     &__input {
       width: 22vw;
       min-width: 9em;
@@ -93,21 +86,6 @@
     }
   }
 
-  &__btn {
-    @include remove-styles();
-    font-family: 'Roboto', sans-serif;
-    cursor: pointer;
-    background-color: var(--global-red);
-    color: var(--global-white);
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: var(--font-size);
-    border-radius: 5em;
-    opacity: 0.8;
-    box-shadow: -2px 5px 14px rgba(0, 0, 0, 0), 2px 5px 14px rgba(0, 0, 0, 0);
-    transition: opacity 250ms ease-in, box-shadow 300ms ease;
-  }
-
   // Placed icon after the input to target it for animation.
   .icon-container {
     order: -1; // default order -> 0
@@ -121,17 +99,18 @@
 
   }
 
-  // focus-within because input is insied the autocomplete-container
-  .autocomplete-container:focus-within+.icon-container,
-  .autocomplete-container:focus-within+.icon-container #icon--glow {
-    opacity: 1;
-  }
+}
 
-  .autocomplete-container:focus-within~&__btn {
-    opacity: 1;
-    box-shadow: -2px 4px 12px var(--red-shadow), 2px 4px 12px var(--light-red-shadow);
-  }
+/* ++++++++++ Animating on clicking search field ++++++++++ */
+// focus-within because input is insied the autocomplete-container
+.autocomplete-container:focus-within+.icon-container,
+.autocomplete-container:focus-within+.icon-container #icon--glow {
+  opacity: 1;
+}
 
+.autocomplete-container:focus-within~.solid-btn {
+  opacity: 1;
+  box-shadow: -2px 4px 12px var(--red-shadow), 2px 4px 12px var(--light-red-shadow);
 }
 
 @media (min-width: 768px) {
