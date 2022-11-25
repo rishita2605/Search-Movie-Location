@@ -1,12 +1,12 @@
 # **SF Movies**
 
- [![](https://img.shields.io/badge/Hosted_On_Netlify-informational?style=for-the-badge&logo=netlify&labelColor=dc143c&color=ea1c24&logoColor=ffffff)][1] 
+ [![](https://img.shields.io/badge/Hosted_On_Netlify-informational?style=for-the-badge&logo=netlify&labelColor=ea1c24&color=fb624c&logoColor=ffffff)][1] 
  
  [1]: https://www.linkedin.com/in/rishita-raha/](https://taupe-tapioca-400ff7.netlify.app/
  
 ## Technologies used 
-![](https://img.shields.io/badge/React-informational?style=for-the-badge&logo=react&labelColor=dc143c&color=ea1c24&logoColor=ffffff) &nbsp;
-![](https://img.shields.io/badge/SCSS-informational?style=for-the-badge&logo=sass&labelColor=dc143c&color=ea1c24&logoColor=ffffff)
+![](https://img.shields.io/badge/React-informational?style=for-the-badge&logo=react&labelColor=ea1c24&color=fb624c&logoColor=ffffff) &nbsp;
+![](https://img.shields.io/badge/SCSS-informational?style=for-the-badge&logo=sass&labelColor=ea1c24&color=fb624c&logoColor=ffffff)
 
 - APIs Used - SF Movies API, MapBox
 - Package Installer - npm
