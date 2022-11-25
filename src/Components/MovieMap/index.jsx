@@ -47,10 +47,8 @@ export default function MovieMap ({ location, zoom }) {
     map.current = new mapboxgl.Map({
       container: mapContainerRef.current,
       style,
-      // mapbox://styles/rishita2605/clauplkbh00gz14mpmxdryjsf
-      // mapbox://styles/rishita2605/clatc3iet000615oyl41h0lpk
-      center: [-122.271356, 37.804456],
-      zoom: 11
+      center: [78.492857, 22.200661], // India's coordinates
+      zoom: 1
     })
 
     // Add navigation control (the +/- zoom buttons)
@@ -83,7 +81,12 @@ export default function MovieMap ({ location, zoom }) {
 
     // for the animation when moving from one location to another.
     map.current.flyTo({
-      center: coords[Object.keys(coords)[0]]
+      center: coords[Object.keys(coords)[0]],
+      speed: 2.6,
+      curve: 1.26,
+      easing (t) {
+        return t
+      }
     })
   }, [coords, location])
 
@@ -93,7 +96,12 @@ export default function MovieMap ({ location, zoom }) {
     const center = coords[Object.keys(coords)[0]]
     map.current.flyTo({
       center,
-      zoom
+      zoom,
+      speed: 0.7,
+      curve: 1,
+      easing (t) {
+        return t
+      }
     })
   }, [zoom, coords])
   /* ---------- Side Effects ---------- */

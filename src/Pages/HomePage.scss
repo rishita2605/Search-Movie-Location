@@ -172,7 +172,7 @@ $card-header-font: 1.36rem;
     .movie-card {
       font-family: 'Roboto', sans-serif;
       height: fit-content;
-      max-height: 61vh; // to handle when text-content exceeds the div height (ends up incrasing the div height if no boundary given. 
+      max-height: 55vh; // to handle when text-content exceeds the div height (ends up incrasing the div height if no boundary given. 
       overflow-y: scroll;
 
       &__header {
