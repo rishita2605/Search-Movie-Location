@@ -23,20 +23,6 @@
   }
 }
 
-
-
-@media (min-width: 768px) {
-  .map {
-    height: 92%; // 100%;
-    margin: auto 0 0 0;
-  }
-}
-
-.map {
-  width: 100%; // change this for animation when box appears
-  @include add-box-features(1.4rem);
-}
-
 @media (min-width: 768px) {
   .card-container {
     transform: scaleX(0);
@@ -152,21 +138,4 @@ $card-header-font: 1.36rem;
     opacity: 1;
   }
 
-}
-
-
-
-.marker-popup {
-  box-shadow: 10px -10px 8px var(--grey-shadow);
-
-  .mapboxgl-popup-content {
-    font-family: 'Roboto', sans-serif;
-    padding: 0.5rem 1rem;
-    font-size: var(--font-size);
-    border-radius: 0.5em;
-  }
-
-  .mapboxgl-popup-content {
-    background: var(--global-dark-grey);
-  }
 }

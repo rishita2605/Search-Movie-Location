@@ -3,6 +3,8 @@ import { React, useEffect, useState, useRef } from 'react'
 import mapboxgl from '!mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
 import PropTypes from 'prop-types'
 
+import './MovieMap.scss'
+
 export default function MovieMap ({ location, zoom }) {
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN
   /* ++++++++++ Function State ++++++++++ */

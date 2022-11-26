@@ -1,0 +1,40 @@
+@import '../../global.scss';
+
+.map {
+  width: 100%;
+  @include add-box-features(1.4rem);
+}
+
+@media (min-width: 768px) {
+  .map {
+    height: 92%;
+  }
+}
+
+@media (max-width: 768px) {
+  .map {
+    height: 95%;
+  }
+}
+
+@media (max-width: 576px) {
+  .map {
+    width: 92%;
+  }
+}
+
+/* ++++++++++ Marker Styling ++++++++++ */
+.marker-popup {
+  box-shadow: 10px -10px 8px var(--grey-shadow);
+
+  .mapboxgl-popup-content {
+    font-family: 'Roboto', sans-serif;
+    padding: 0.5rem 1rem;
+    font-size: var(--font-size);
+    border-radius: 0.5em;
+  }
+
+  .mapboxgl-popup-content {
+    background: var(--global-dark-grey);
+  }
+}
