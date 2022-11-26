@@ -13,6 +13,7 @@ root.render(
       <div className="bubbles__2"></div>
       <div className="bubbles__3"></div>
       <div className="bubbles__4"></div>
+      <div className="bubbles__5"></div>
     </div>
     <App />
   </React.StrictMode>

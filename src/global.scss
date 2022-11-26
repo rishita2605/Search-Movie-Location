@@ -130,10 +130,7 @@ body {
   width: 100vw;
   overflow: hidden;
 
-  &__1,
-  &__2,
-  &__3,
-  &__4 {
+  &>* {
     height: 200px;
     width: 200px;
     border-radius: 70%;
@@ -164,7 +161,21 @@ body {
 
   &__4 {
     top: 50%;
-    left: 50%;
+    left: 40%;
+    filter: blur(70px);
+  }
 
+  // &__5 {
+  //   top: 50%;
+  //   left: 40%;
+  //   filter: blur(10px);
+  // }
+}
+
+@media (max-width: 768px) {
+  .bubbles {
+    &__4 {
+      filter: blur(140px);
+    }
   }
 }
