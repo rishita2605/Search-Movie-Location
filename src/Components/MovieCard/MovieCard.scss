@@ -157,6 +157,7 @@ $card-header-font: 1.36rem;
 
       .no-movie {
         margin-bottom: 4vh;
+        font-size: calc(#{ $card-header-font } - #{ $card-header-font }/7);
       }
 
       .close {
