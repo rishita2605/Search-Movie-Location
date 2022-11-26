@@ -171,27 +171,6 @@ body {
   }
 }
 
-//Search 
-@media (max-width: 576px) {
-  .search {
-
-    &__container {
-      padding: 0;
-      width: 80vw;
-      height: fit-content;
-    }
-
-    &__input {
-      margin: 0 1vw;
-    }
-
-    .icon-container {
-      display: none;
-    }
-
-  }
-}
-
 .bubbles {
   position: absolute;
   height: 100vh;
