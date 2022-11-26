@@ -26,7 +26,6 @@
   --global-light-red: rgb(251, 98, 76);
   --global-dark-grey: rgb(25, 26, 35);
   --global-medium-grey: rgb(41, 44, 55);
-  /*rgb(34, 37, 47)*/
   --global-light-grey: rgb(146, 139, 139);
 
   --grey-shadow: rgba(34, 37, 47, 0.426);
@@ -124,48 +123,7 @@ body {
   }
 }
 
-// card 
-@media (max-width: 768px) {
-  .card-container {
-    .card {
-      margin-top: 1rem;
-      padding: 1vh 1.8vw 0.5vh 4vw;
-
-      .movie-card {
-        max-height: none;
-        max-width: 90%;
-      }
-
-      .close {
-        &__btn {
-          transform: rotateZ(180deg);
-          transition: none;
-        }
-      }
-    }
-  }
-
-  .is-container-visible {
-    width: 100%;
-    min-width: fit-content;
-    height: 10vh;
-  }
-}
-
-@media (max-width: 576px) {
-
-  .card-container {
-    height: fit-content;
-  }
-
-  .is-container-visible {
-    width: 100%;
-    min-width: 100vw;
-  }
-}
-
-
-
+/* ++++++++++ Visual Elements ++++++++++ */
 .bubbles {
   position: absolute;
   height: 100vh;

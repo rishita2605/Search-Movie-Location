@@ -1,0 +1,172 @@
+@import '../../global.scss';
+
+// Movie Card
+$card-header-font: 1.36rem;
+
+.card-container {
+  // border: 2px solid red;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 500ms ease 600ms;
+
+  // add overflow hidden when card is hidden 
+  .card {
+
+    height: 100%;
+    background-color: var(--global-medium-grey);
+    @include add-box-features(1.4rem);
+
+    //features being animated
+    opacity: 0;
+    transition: transform 200ms ease-in-out 200ms, opacity 1500ms ease 1500ms;
+
+    .movie-card {
+      font-family: 'Roboto', sans-serif;
+      height: fit-content;
+      max-height: 55vh; // to handle when text-content exceeds the div height (ends up incrasing the div height if no boundary given. 
+      overflow-y: scroll;
+
+      &__header {
+
+        font-size: $card-header-font;
+        font-weight: 600;
+        line-height: 1.8rem;
+        margin-bottom: 0.8rem;
+
+        &--year {
+          font-size: calc(#{ $card-header-font } - #{ $card-header-font }/4);
+        }
+      }
+
+      &__body__field {
+        margin: 0.5rem 0;
+
+        &--label {
+          color: var(--global-light-grey);
+        }
+      }
+    }
+
+    .no-movie {
+      font-size: $card-header-font;
+      font-weight: 600;
+    }
+
+    .close {
+      display: flex;
+      justify-content: flex-end;
+
+      &__btn {
+        @include remove-styles();
+        cursor: pointer;
+
+        #icon {
+          opacity: 0.6;
+          transition: opacity 100ms ease;
+
+          &--glow {
+            opacity: 0;
+          }
+        }
+
+        &:hover {
+          transform: rotateZ(180deg);
+        }
+
+        &:hover #icon,
+        &:hover #icon--glow {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .is-card-visible {
+    opacity: 1;
+  }
+
+}
+
+@media (min-width: 768px) {
+  .card-container {
+    transform: scaleX(0);
+    transform-origin: right;
+
+    .card {
+      margin-left: 1rem;
+      padding: 1.5vh 1vw 0 2vw;
+      transform: translateX(30vw); // animating this
+
+      .close {
+        &__btn {
+          cursor: pointer;
+          transform: rotateZ(0);
+          transition: transform 350ms ease-in;
+        }
+      }
+    }
+
+    .is-card-visible {
+      transform: translateX(0);
+    }
+  }
+
+  .is-container-visible {
+    transition: all 800ms linear 100ms;
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    .card {
+      margin-top: 1rem;
+      padding: 1vh 1.8vw 0.5vh 4vw;
+
+      .movie-card {
+        max-height: none;
+        max-width: 90%;
+      }
+
+      .close {
+        &__btn {
+          transform: rotateZ(180deg);
+          transition: none;
+        }
+      }
+    }
+  }
+
+  .is-container-visible {
+    width: 100%;
+    min-width: fit-content;
+    height: 10vh;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .card-container {
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+
+    .card {
+      padding: 5vh 6vw 1vh 6vw;
+      width: 92%;
+
+      .no-movie {
+        margin-bottom: 4vh;
+      }
+
+      .close {
+        display: none;
+      }
+    }
+  }
+
+  .is-container-visible {
+    width: 100%;
+    min-width: 100vw;
+  }
+}
