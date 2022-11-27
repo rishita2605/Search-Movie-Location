@@ -123,7 +123,10 @@ export default function Search ({ movies, searchVal, setSearchVal, setLocation }
       // Using render input so that the onKeyUp event can be attached to it.
       renderInput={
         function (props) {
-          return <input {...props} onKeyUp={(evt) => { searchMovie(evt) }} className='search__input'/>
+          return <input {...props}
+          onKeyUp={(evt) => { searchMovie(evt) }}
+          className='search__input'
+          placeholder='Search for movies...'/>
         }
       }
       menuStyle={menuStyle}
