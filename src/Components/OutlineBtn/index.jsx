@@ -6,7 +6,8 @@ import './OutlineBtn.scss'
 
 export default function OutlineBtn ({ btnText, btnOnClick, Icon, ...props }) {
   /* ++++++++++ Function Constants ++++++++++ */
-  const classNames = ['outline-btn', ...props.className.split(' ')] // to allow multiple classes to be added
+  const classNames = Object.keys(props).length !== 0 ? ['outline-btn', ...props.className.split(' ')] : ['outline-btn']
+  // to allow multiple classes to be added
   /* ---------- Function Constants ---------- */
 
   /* ++++++++++ Function Render Method ++++++++++ */
