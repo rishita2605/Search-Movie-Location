@@ -41,5 +41,7 @@
     position: fixed;
     bottom: 1.2rem;
     right: 1.2rem;
+    background-color: var(--grey-shadow);
+    backdrop-filter: blur(4px);
   }
 }
