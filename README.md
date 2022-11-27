@@ -37,7 +37,7 @@ The solution is focused on **front-end.**
 ## Scope of Improvement
 
 1. To use styled components so that if the application is scaled up one wouldn’t have to worry about clashes in class names. 
-2. To use TMDB API to provide more information on the movie cards. 
+2. To use TMDB API to provide more information on the movie cards. Possibly include the movie poster while displaying the movie card. 
 3. To use loaders for processes that takes more time.
 4. To have a light theme along with the dark theme.
 
