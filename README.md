@@ -26,7 +26,7 @@ The solution is focused on **front-end.**
 3. Used react-autocomplete library for the autocomplete feature. 
 4. To limit the search results of the location to San Franscisco used a bounding box in the map api with SF’s coordinates. 
 5. Initially developed a UI using glassmorphism effect. However switched it later. It can be viewed on theme/glassmorphism branch.  
-6. Along with all the locations where a movie was shot, displayed other information like actors, directors, production company etc. etc. which was available in the SF movies API. In the movie card, the “Want to Visit” button takes the user to the location of the movie (also zooms in - in case the map is not zoomed in) 
+6. Along with all the locations where a movie was shot, displayed other information like actors, directors, production company etc. etc. which was available in the SF movies API. In the movie card, the “Want to Visit” button takes the user to the location of the movie (zooms in or out) 
 7. Used micro-animations (transitions) for a better user experience.
 8. Created custom styles for the maps.  
 9. Followed BEM naming convention for SCSS. 
