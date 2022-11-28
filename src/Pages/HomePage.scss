@@ -31,3 +31,17 @@
   top: 1.2rem;
   right: 1.2rem;
 }
+
+@media (max-width: 576px) {
+  .App__header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2vh;
+  }
+
+  .icon-btn {
+    position: relative;
+    top: 0;
+    right: 0;
+  }
+}
