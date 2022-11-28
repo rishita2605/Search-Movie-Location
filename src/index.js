@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './global.scss'
-import './index.css'
+
 import App from './App'
+import './global.scss'
 import reportWebVitals from './reportWebVitals'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
@@ -13,6 +13,7 @@ root.render(
       <div className="bubbles__2"></div>
       <div className="bubbles__3"></div>
       <div className="bubbles__4"></div>
+      <div className="bubbles__5"></div>
     </div>
     <App />
   </React.StrictMode>

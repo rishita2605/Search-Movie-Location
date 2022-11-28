@@ -1,11 +1,12 @@
 import { React, useState, useEffect } from 'react'
 
-import Autocomplete from 'react-autocomplete'
 import PropTypes from 'prop-types'
+import Autocomplete from 'react-autocomplete'
 import useMeasure from 'react-use-measure'
 
-import SearchBtn from '../SearchBtn'
 import { ReactComponent as SearchIcon } from '../../Icons/SearchIcon.svg'
+import './Search.scss'
+import SolidBtn from '../SolidBtn'
 
 export default function Search ({ movies, searchVal, setSearchVal, setLocation }) {
   /* ++++++++++ Function State ++++++++++ */
@@ -129,7 +130,7 @@ export default function Search ({ movies, searchVal, setSearchVal, setLocation }
       />
     </div>
     <SearchIcon className='icon-container'/>
-    <SearchBtn searchMovie = { searchMovie }/>
+    <SolidBtn onClickBtn = { searchMovie } btnText = 'Search'/>
   </div>
   </div>
   )

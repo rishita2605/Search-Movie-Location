@@ -1,0 +1,115 @@
+@import '../../mixins.scss';
+
+.search {
+
+  position: relative;
+  z-index: 10;
+
+  &__container {
+    @include add-box-features(0.9rem);
+    position: relative;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    background-color: var(--global-medium-grey);
+
+    &>* {
+      margin-right: 0.3em;
+    }
+  }
+
+  &__input {
+    @include remove-styles();
+    font-family: 'Raleway', sans-serif;
+    padding: 0.5em 0;
+    color: var(--global-text);
+    font-size: var(--font-size);
+  }
+
+  &__menu-item {
+
+    padding: 1em 5.2em;
+    margin-bottom: 0.16em;
+    border-radius: 0.5em;
+    box-shadow: none;
+    transition: box-shadow 100ms linear;
+    backdrop-filter: blur(14px);
+
+    &:hover {
+      box-shadow: 0 2px 10px var(--white-shadow);
+      cursor: pointer;
+    }
+  }
+
+  // Placed icon after the input to target it for animation.
+  .icon-container {
+    order: -1; // default order -> 0
+    opacity: 0.6;
+    transition: opacity 250ms ease-in;
+    margin: 0;
+
+    #icon--glow {
+      opacity: 0;
+    }
+
+  }
+
+}
+
+/* ++++++++++ Animating on clicking search field ++++++++++ */
+// focus-within because input is inside the autocomplete-container
+.autocomplete-container:focus-within+.icon-container,
+.autocomplete-container:focus-within+.icon-container #icon--glow {
+  opacity: 1;
+}
+
+.autocomplete-container:focus-within~.solid-btn {
+  opacity: 1;
+  box-shadow: -2px 4px 12px var(--red-shadow), 2px 4px 12px var(--light-red-shadow);
+}
+
+/* ++++++++++ Tablets + Laptops ++++++++++ */
+@media (min-width: 576px) {
+
+  .search {
+    &__container {
+      padding: 2vh 1vw;
+      min-width: 24rem;
+      width: fit-content;
+    }
+
+    &__input {
+      width: 22vw;
+      min-width: 9em;
+    }
+
+  }
+}
+
+
+/* ++++++++++ Mobile devices ++++++++++ */
+@media (max-width: 576px) {
+  .search {
+
+    &__container {
+      padding: 0;
+      width: 92vw;
+      height: fit-content;
+      justify-content: space-between;
+    }
+
+    &__input {
+      padding-left: 2vw;
+    }
+
+    &__menu-item {
+
+      padding: 2.6vh 2vw;
+    }
+
+    .icon-container {
+      display: none;
+    }
+
+  }
+}

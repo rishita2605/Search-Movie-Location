@@ -1,0 +1,15 @@
+/* ++++++++++ Mixins ++++++++++ */
+@mixin remove-styles {
+  border: none;
+  text-decoration: none;
+  background: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+@mixin add-box-features($box-border-radius) {
+  border-radius: $box-border-radius;
+  box-shadow: -5px 10px 20px rgba(7, 7, 7, 0.595);
+}

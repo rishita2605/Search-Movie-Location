@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 import { ReactComponent as CloseIcon } from '../../Icons/CloseIcon.svg'
 import { ReactComponent as HeartIcon } from '../../Icons/HeartIcon.svg'
+import './MovieCard.scss'
 import OutlineBtn from '../OutlineBtn'
 
 export default function MovieCard ({ movies, location, searchVal, setZoom }) {
@@ -23,26 +24,25 @@ export default function MovieCard ({ movies, location, searchVal, setZoom }) {
   const containerRef = useRef(null)
   /* ---------- Function State ---------- */
 
-  /* ++++++++++ Function Constants ++++++++++ */
-  /* ---------- Function Constants ---------- */
-
   /* ++++++++++ Function Methods ++++++++++ */
   const closeCard = () => {
     cardRef.current.classList.remove('is-card-visible')
     containerRef.current.classList.remove('is-container-visible')
     setDisplay(false)
-    // Hide card after map animation
-    setTimeout(() => {
-      setStyle({
-        width: '0'
-      })
-    }, 100)
+    setStyle({
+      width: '0'
+    })
   }
 
+  // Zoom on clicking want to visit button
   const zoomOnClick = () => {
-    setZoom(Math.floor(Math.random() * 14) + 8)
-    setStyle('')
+    setZoom(Math.floor(Math.random() * 8) + 6)
+    setStyle({
+      width: '29vw'
+    })
   }
+
+  // Display card when a search is made
   const displayCard = (displayVal) => {
     setDisplay(displayVal)
     cardRef.current.classList.add('is-card-visible')
@@ -55,8 +55,9 @@ export default function MovieCard ({ movies, location, searchVal, setZoom }) {
     }, 800)
   }
   /* ---------- Function Methods ---------- */
+
   /* ++++++++++ Side Effects ++++++++++ */
-  // Only the location state changes when a value is searched
+  // location changes when the enter/search button is clicked
   useEffect(() => {
     const movieData = {}
     for (const m of movies) {
@@ -79,10 +80,11 @@ export default function MovieCard ({ movies, location, searchVal, setZoom }) {
     setCardContent(movieData)
   }, [location])
   /* ---------- Side Effects ---------- */
-  console.log({ style })
+
+  /* ++++++++++ Function Render Method ++++++++++ */
   return (
   <div className='card-container' ref={containerRef}
-  style={ typeof style === 'string' ? { width: '0' } : style }> {/* style check to prevent errors during re-rendering */}
+  style={ style }>
     <div className="card" ref={cardRef}>
     <div className="close">
       <button className="close__btn" onClick={ closeCard }>

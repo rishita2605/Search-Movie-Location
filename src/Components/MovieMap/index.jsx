@@ -3,6 +3,8 @@ import { React, useEffect, useState, useRef } from 'react'
 import mapboxgl from '!mapbox-gl' // eslint-disable-line import/no-webpack-loader-syntax
 import PropTypes from 'prop-types'
 
+import './MovieMap.scss'
+
 export default function MovieMap ({ location, zoom }) {
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN
   /* ++++++++++ Function State ++++++++++ */
@@ -13,7 +15,7 @@ export default function MovieMap ({ location, zoom }) {
   /* ---------- Function State ---------- */
 
   /* ++++++++++ Function Constants ++++++++++ */
-  const style = 'mapbox://styles/rishita2605/clauqtw2m000815s19z7mhl8j'
+  const style = 'mapbox://styles/rishita2605/clay0q3y100j614o3s80us8ot'
   /* ---------- Function Constants ---------- */
 
   /* ++++++++++ Function Methods ++++++++++ */
@@ -47,8 +49,8 @@ export default function MovieMap ({ location, zoom }) {
     map.current = new mapboxgl.Map({
       container: mapContainerRef.current,
       style,
-      center: [78.492857, 22.200661], // India's coordinates
-      zoom: 1
+      center: [77.2219388, 28.6517178], // India's coordinates
+      zoom: 0
     })
 
     // Add navigation control (the +/- zoom buttons)
@@ -98,6 +100,7 @@ export default function MovieMap ({ location, zoom }) {
       center,
       zoom,
       speed: 0.7,
+      duration: 1000,
       curve: 1,
       easing (t) {
         return t
