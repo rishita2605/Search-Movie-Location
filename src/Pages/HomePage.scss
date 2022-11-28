@@ -1,4 +1,4 @@
-@import '../global.scss';
+@import '../mixins.scss';
 
 @media (min-width:769px) {
   .container {
@@ -21,4 +21,13 @@
       grid-template-rows: auto 1fr;
     }
   }
+}
+
+.icon-btn {
+  @include remove-styles();
+  cursor: pointer;
+  position: fixed;
+  z-index: 80;
+  top: 1.2rem;
+  right: 1.2rem;
 }

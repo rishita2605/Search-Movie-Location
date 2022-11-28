@@ -170,3 +170,20 @@ $card-header-font: 1.36rem;
     min-width: 100vw;
   }
 }
+
+/* ++++++++++ Light theme ++++++++++ */
+.light-theme {
+  .card-container {
+    .card {
+      background-color: var(--global-lightest-grey);
+
+      .movie-card {
+        &__body__field {
+          &--label {
+            color: var(--global-medium-grey);
+          }
+        }
+      }
+    }
+  }
+}

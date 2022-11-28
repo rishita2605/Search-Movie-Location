@@ -12,8 +12,11 @@
   --global-medium-grey: rgb(41, 44, 55);
   --global-light-grey: rgb(146, 139, 139);
 
-  --global-dark-red: #C11219;
-  --global-lightest-grey: #F9F8FD;
+  /* ++++++++++ Light theme colors ++++++++++ */
+  --global-dark-red: rgb(193, 18, 25);
+  --global-lightest-grey: rgb(220, 220, 233);
+  --global-black: rgba(10, 10, 10, 1);
+  --global-light-theme-white: rgb(206, 203, 216);
 
   --grey-shadow: rgba(34, 37, 47, 0.426);
   --white-shadow: rgba(255, 244, 255, 0.676);
@@ -66,8 +69,13 @@ html {
 }
 
 body {
-  background-color: var(--global-background);
-  color: var(--global-text);
+  background-color: var(--global-dark-grey);
+  color: var(--global-white);
+}
+
+body[class="light-theme"] {
+  background-color: var(--global-light-theme-white);
+  color: var(--global-black);
 }
 
 /* Styling text when it is selected by user */
@@ -152,17 +160,23 @@ body {
     filter: blur(70px);
   }
 
-  // &__5 {
-  //   top: 50%;
-  //   left: 40%;
-  //   filter: blur(10px);
-  // }
+  &__5 {
+    z-index: -1;
+  }
 }
 
 @media (max-width: 768px) {
   .bubbles {
     &__4 {
       filter: blur(140px);
+    }
+  }
+}
+
+.light-theme {
+  .bubbles {
+    &>* {
+      background-color: var(--global-black);
     }
   }
 }

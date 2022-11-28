@@ -28,11 +28,11 @@ export default function Search ({ movies, searchVal, setSearchVal, setLocation }
 
   const menuItemStyle = {
     isHighlighted: {
-      background: 'rgba(0,0,0,0.01)',
+      background: 'rgba(0,0,0,0.26)',
       boxShadow: '0 2px 10px rgba(255, 244, 255, 0.676)'
     },
     notHighlighted: {
-      background: 'rgba(0,0,0,0.01)'
+      background: 'rgba(0,0,0,0.26)'
     }
   }
   /* ---------- Function Constants ---------- */
