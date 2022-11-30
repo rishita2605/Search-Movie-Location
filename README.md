@@ -46,3 +46,17 @@ The solution is focused on **front-end.**
 - Clone the repo 
 - Install the required packages by running `npm install`
 - Finally do `npm start` 
+
+## Screenshots 
+
+### Using the Map
+Search for movies by entering the movie title or selecting a movie from the dropdown. This displays the markers for locations where the movie was shot. Click on Want to visit to get a more zoomed in view. Click on the markers shows a popup with the location. 
+
+
+https://user-images.githubusercontent.com/64982040/204746303-7e8defc5-1815-4605-9592-bebb4350f491.mov
+
+
+### Switch Themes 
+
+https://user-images.githubusercontent.com/64982040/204745658-363cede8-e11f-41cf-8aff-3412fd0d025f.mov
+
