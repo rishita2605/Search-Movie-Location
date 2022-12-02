@@ -56,7 +56,7 @@ Search for movies by entering the movie title or selecting a movie from the drop
 https://user-images.githubusercontent.com/64982040/204746303-7e8defc5-1815-4605-9592-bebb4350f491.mov
 
 
-<!-- ### Switch Themes 
+### Switch Themes 
 
-https://user-images.githubusercontent.com/64982040/204745658-363cede8-e11f-41cf-8aff-3412fd0d025f.mov -->
+https://user-images.githubusercontent.com/64982040/204745658-363cede8-e11f-41cf-8aff-3412fd0d025f.mov
 
