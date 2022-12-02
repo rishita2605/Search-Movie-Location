@@ -2,7 +2,7 @@
 
  [![](https://img.shields.io/badge/Hosted_On_Netlify-informational?style=for-the-badge&logo=netlify&labelColor=ea1c24&color=fb624c&logoColor=ffffff)][1] 
  
- [1]: (https://taupe-tapioca-400ff7.netlify.app/)
+ [1]: [](https://taupe-tapioca-400ff7.netlify.app/)
  
 ## Technologies used 
 ![](https://img.shields.io/badge/React-informational?style=for-the-badge&logo=react&labelColor=ea1c24&color=fb624c&logoColor=ffffff) &nbsp;
