@@ -15,7 +15,9 @@ export default function HomePage () {
   const [location, setLocation] = useState([])
   const [zoom, setZoom] = useState(0.5)
   const [currentIcon, setCurrentIcon] = useState(DownArrow)
-  const navRef = useRef(null)
+  const oneRef = useRef(null)
+  const twoRef = useRef(null)
+  const [colOne, setColOne] = useState(true)
   /* ---------- Function State ---------- */
 
   /* ++++++++++ Side Effects ++++++++++ */
@@ -40,22 +42,21 @@ export default function HomePage () {
    * Navigation button for mobile UI
    */
   const navigateOnClick = () => {
-    // We are already in 1st section - need to go to next section
-    if (navRef.current.classList.contains('active')) {
-      window.location.replace('/#column-2')
+    if (colOne) {
       setCurrentIcon(UpArrow)
+      setColOne(!colOne)
+      twoRef.current.scrollIntoView()
     } else {
-      window.location.replace('/#column-1')
       setCurrentIcon(DownArrow)
+      setColOne(!colOne)
+      oneRef.current.scrollIntoView()
     }
-
-    navRef.current.classList.toggle('active')
   }
   /* ---------- Function Methods ---------- */
 
   /* ++++++++++ Function Render Method ++++++++++ */
   return <div className='home-page container'>
-    <div className="container__column container__column--left active" id='column-1' ref={navRef}>
+    <div className="container__column container__column--left" id='column-1' ref={oneRef}>
       <Search
         movies={ movies }
         searchVal = { searchVal } setSearchVal = { setSearchVal }
@@ -66,7 +67,7 @@ export default function HomePage () {
         zoom = { zoom }
         setZoom = { setZoom }/>
     </div>
-    <div className="container__column container__column--right" id='column-2'>
+    <div className="container__column container__column--right" id='column-2' ref={twoRef}>
       <MovieCard
         movies={ movies }
         location={ location }
