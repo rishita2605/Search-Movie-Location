@@ -2,11 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App'
+import ThemeWrapper from './Components/ThemeWrapper'
 import './global.scss'
 import reportWebVitals from './reportWebVitals'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
+  <ThemeWrapper>
   <React.StrictMode>
     <div className="bubbles">
       <div className="bubbles__1"></div>
@@ -17,6 +19,7 @@ root.render(
     </div>
     <App />
   </React.StrictMode>
+  </ThemeWrapper>
 )
 
 // If you want to start measuring performance in your app, pass a function

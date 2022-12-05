@@ -36,12 +36,33 @@
   .navigate-btn {
     border-radius: 70%;
     margin: 0;
-    height: 4rem;
-    width: 4rem;
+    height: 3rem;
+    width: 3rem;
     position: fixed;
     bottom: 1.2rem;
     right: 1.2rem;
     background-color: var(--grey-shadow);
     backdrop-filter: blur(4px);
   }
+}
+
+/* ++++++++++ Light Theme ++++++++++ */
+.light-theme {
+
+  .outline-btn {
+    color: var(--global-black);
+    border: 2px solid var(--global-dark-red);
+    margin: 2.6vh 0;
+    cursor: pointer;
+    transition: box-shadow 200ms linear;
+
+    &__icon {
+      margin: 0 0.5em;
+    }
+
+    &:hover {
+      box-shadow: 0 2px 10px var(--red-shadow);
+    }
+  }
+
 }

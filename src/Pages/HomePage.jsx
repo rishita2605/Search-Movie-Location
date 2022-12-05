@@ -13,7 +13,7 @@ export default function HomePage () {
   const [searchVal, setSearchVal] = useState('') // Defining search value so that it can be accessed in Map component as well.
   const [movies, setMovies] = useState([])
   const [location, setLocation] = useState([])
-  const [zoom, setZoom] = useState(0.5)
+  const [zoom, setZoom] = useState(1.7)
   const [currentIcon, setCurrentIcon] = useState(DownArrow)
   const oneRef = useRef(null)
   const twoRef = useRef(null)

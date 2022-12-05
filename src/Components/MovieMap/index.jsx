@@ -50,7 +50,7 @@ export default function MovieMap ({ location, zoom }) {
       container: mapContainerRef.current,
       style,
       center: [77.2219388, 28.6517178], // India's coordinates
-      zoom: 0
+      zoom: 1.7
     })
 
     // Add navigation control (the +/- zoom buttons)
